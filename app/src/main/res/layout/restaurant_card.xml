@@ -85,7 +85,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_below="@id/restaurant_card_phone"
-                    android:text="Adderess"
+                    android:text="Address"
                     android:textColor="@color/dark_text_color"
                     android:textSize="20sp" />
 
