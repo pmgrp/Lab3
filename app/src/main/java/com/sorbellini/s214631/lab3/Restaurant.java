@@ -21,8 +21,9 @@ public class Restaurant {
     public ArrayList<String> reservations; //those are ArrayLists of strings because they have only the IDs
     public ArrayList<String> dailyOffers; //from which you can retrieve the object from DB
     public ArrayList<String> comments;
+    float distance[] = {0,0,0};
 
-    public Restaurant(){
+    public Restaurant() {
         this.ID = null;
         this.latitude = 0;
         this.longitude = 0;
@@ -61,7 +62,7 @@ public class Restaurant {
         return restaurantPhone;
     }
 
-    public String getRestaurantAddress(){
+    public String getRestaurantAddress() {
         return restaurantAddress;
     }
 
@@ -77,7 +78,7 @@ public class Restaurant {
         return restaurantPiva;
     }
 
-    public String getRestaurantPhoto(){
+    public String getRestaurantPhoto() {
         return restaurantPhoto;
     }
 
@@ -103,7 +104,7 @@ public class Restaurant {
         this.restaurantPhone = restaurantPhone;
     }
 
-    public void setRestaurantAddress(String restaurantAddress){
+    public void setRestaurantAddress(String restaurantAddress) {
         this.restaurantAddress = restaurantAddress;
     }
 
@@ -119,20 +120,19 @@ public class Restaurant {
         this.restaurantPiva = restaurantPiva;
     }
 
-    public void setRestaurantPhoto(String restaurantPhoto){
+    public void setRestaurantPhoto(String restaurantPhoto) {
         this.restaurantPhoto = restaurantPhoto;
     }
 
 
-
-    public class Day{
+    public class Day {
         private final String[] namesOfDays = {"MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"};
         int day; //day of week 0 for Monday 6 for Sunday
         boolean breakfast;
         boolean lunch;
         boolean dinner;
 
-        public Day(){
+        public Day() {
             this.day = 0;
             this.breakfast = false;
             this.lunch = false;
@@ -140,33 +140,40 @@ public class Restaurant {
         }
 
         //getter
-        public String getDayName(){
+        public String getDayName() {
             return namesOfDays[day];
         }
-        public int getDay(){
+
+        public int getDay() {
             return this.day;
         }
-        public boolean getBreakfast(){
+
+        public boolean getBreakfast() {
             return this.breakfast;
         }
-        public boolean getLunch(){
+
+        public boolean getLunch() {
             return this.lunch;
         }
-        public boolean getDinner(){
+
+        public boolean getDinner() {
             return this.dinner;
         }
 
         //setter
-        public void setDay(int day){
+        public void setDay(int day) {
             this.day = day;
         }
-        public void setBreakfast(boolean breakfast){
+
+        public void setBreakfast(boolean breakfast) {
             this.breakfast = breakfast;
         }
-        public void setLunch(boolean lunch){
+
+        public void setLunch(boolean lunch) {
             this.lunch = lunch;
         }
-        public void setDinner(boolean dinner){
+
+        public void setDinner(boolean dinner) {
             this.dinner = dinner;
         }
 
