@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">Lab3</string>
     <string name="action_settings">Settings</string>
+    <string name="name_offer">Name</string>
+    <string name="description_offer">Description</string>
+    <string name="total_description">This is where all the description of the offer will be written.</string>
+    <string name="price_offer">Price</string>
+    <string name="restaurant_details">Restaurant Details</string>
+
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
