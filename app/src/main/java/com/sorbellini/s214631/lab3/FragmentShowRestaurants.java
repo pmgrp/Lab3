@@ -1,7 +1,7 @@
 package com.sorbellini.s214631.lab3;
 
 import android.content.Context;
-import android.net.Uri;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,24 +10,40 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Spinner;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class FragmentShowRestaurants extends Fragment {
 
-    //adapter and recicler view for the card view
+    //adapter and recycler view for the card view
     AdapterShowRestaurants cardAdapter;
     RecyclerView rv;
     ArrayList<Restaurant> restaurants;
+    FragmentListener mCallback;
+    Location mLastLocation;
+
+    //implements an interface to retrieve location from activity
+    public interface FragmentListener {
+        Location getLocation();
+    }
 
     public FragmentShowRestaurants() {
         // Required empty public constructor
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_show_restaurants, container, false);
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        // This makes sure that the container activity has implemented
+        // the callback interface. If not, it throws an exception
+        try {
+            mCallback = (FragmentListener) getActivity();
+        } catch (ClassCastException e) {
+            throw new ClassCastException(getActivity().toString()
+                    + " must implement FragmentListener");
+        }
 
     }
 
@@ -35,7 +51,28 @@ public class FragmentShowRestaurants extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         restaurants = DataGen.makeRestaurants();
-        cardAdapter = new AdapterShowRestaurants(restaurants);
+
+        //hide spinner from parent activity
+        Spinner spinner = (Spinner)getActivity().findViewById(R.id.spinner);
+        spinner.setVisibility(View.GONE);
+
+        mLastLocation = mCallback.getLocation();
+
+        if (mLastLocation != null) {
+            //compute distance in meters in distance[0]
+            for (int i = 0; i < restaurants.size(); i++) {
+                Location.distanceBetween(mLastLocation.getLatitude(), mLastLocation.getLongitude(),
+                        restaurants.get(i).getLatitude(), restaurants.get(i).getLongitude(), restaurants.get(i).distance);
+            }
+            Collections.sort(restaurants, new RestaurantDistanceComparator());
+        }
+
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_show_restaurants, container, false);
 
     }
 
