@@ -31,6 +31,18 @@ public class Reservation {
         this.status = ARRIVED;
     }
 
+
+    public Reservation (String ID, String restaurantID, Customer customer, DailyOffer dailyOffer,
+                        String time) {
+        this.ID = ID;
+        this.restaurantID = restaurantID;
+        this.customer = customer;
+        this.dailyOffer = dailyOffer;
+        this.time = time;
+        this.comment = null;
+        this.status = ARRIVED;
+    }
+
     //getter
     public String getID(){ return ID; }
     public String getRestaurantID(){ return restaurantID; }

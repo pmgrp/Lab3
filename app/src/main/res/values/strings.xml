@@ -6,7 +6,7 @@
     <string name="total_description">This is where all the description of the offer will be written.</string>
     <string name="price_offer">Price</string>
     <string name="restaurant_details">Restaurant Details</string>
-
+    <string name="hint_offer_name">Name of the offer</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
