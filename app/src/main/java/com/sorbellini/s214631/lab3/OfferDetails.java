@@ -8,6 +8,6 @@ public class OfferDetails extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_offer_details);
+        setContentView(R.layout.activity_show_offer_details);
     }
 }

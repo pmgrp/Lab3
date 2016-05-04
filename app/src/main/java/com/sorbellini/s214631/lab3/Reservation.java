@@ -32,6 +32,7 @@ public class Reservation {
     }
 
 
+
     public Reservation (String ID, String restaurantID, Customer customer, DailyOffer dailyOffer,
                         String time) {
         this.ID = ID;
