@@ -4,11 +4,9 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.location.Location;
-import android.nfc.Tag;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -32,16 +30,14 @@ import com.google.android.gms.location.LocationServices;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class ActivityShowOffers extends AppCompatActivity implements
+public class ActivityMain extends AppCompatActivity implements
         GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener {
+        GoogleApiClient.OnConnectionFailedListener,
+        FragmentShowRestaurants.FragmentListener,
+        FragmentShowOffers.FragmentListener{
 
     private GoogleApiClient mGoogleApiClient;
     private Location mLastLocation;
-    ArrayList<DailyOffer> offers;
-    //adapter and recicler view for the card view
-    AdapterShowOffers cardAdapter;
-    RecyclerView rv;
     //drawer stuff
     String[] mDrawerListItems;
     DrawerLayout mDrawerLayout;
@@ -53,10 +49,10 @@ public class ActivityShowOffers extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_show_offers);
+        setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_spinner);
         /**
-         * Drawer
+         * Drawer (The side menu)
          */
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
@@ -96,23 +92,29 @@ public class ActivityShowOffers extends AppCompatActivity implements
         mDrawerToggle.syncState();
 
         /**
-         * Spinner
+         * Spinner (the switch on the toolbar)
          */
         spinner = (Spinner) findViewById(R.id.spinner);
         if (spinner != null) {
             spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                    // your code here
+                    //the fragment that contains the offers
+                    FragmentShowOffers fo;
                     switch (position) {
                         case 0:
-                            Collections.sort(offers, new OfferDistanceComparator());
+                            //offers ordered by distance
+                            fo = (FragmentShowOffers) getSupportFragmentManager().findFragmentById(R.id.frame_container);
+                            if(fo != null)
+                                fo.sortByDistance();
                             break;
                         case 1:
-                            Collections.sort(offers, new OfferPriceComparator());
+                            //offers ordered by price
+                            fo = (FragmentShowOffers) getSupportFragmentManager().findFragmentById(R.id.frame_container);
+                            if(fo != null)
+                                fo.sortByPrice();
                             break;
                     }
-                    cardAdapter.notifyDataSetChanged();
                 }
 
                 @Override
@@ -124,26 +126,19 @@ public class ActivityShowOffers extends AppCompatActivity implements
         }
 
         /**
-         * Create Offers and set Api for location
+         * Set Api for location and place Offers fragment
          */
-
-        offers = DataGen.makeOffers();
 
         if (mGoogleApiClient == null) {
             // Building the GoogleApi client
             buildGoogleApiClient();
         }
 
-
-        /**
-         * Populate card view
-         */
-        rv = (RecyclerView) findViewById(R.id.offers);
-        LinearLayoutManager llm = new LinearLayoutManager(this);
-        rv.setLayoutManager(llm);
-        cardAdapter = new AdapterShowOffers(offers);
-        rv.setAdapter(cardAdapter);
-
+        //Offers take the place of frame container
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        Fragment fragment = new FragmentShowOffers();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.frame_container, fragment).commit();
 
     }
 
@@ -165,37 +160,30 @@ public class ActivityShowOffers extends AppCompatActivity implements
     }
 
     /**
-     * Switch fragment inside the view
-     * @param position
+     * Switch fragments inside the frame container
+     *
      */
 
     public void displayView(int position) {
         Fragment fragment = null;
         switch (position) {
             case 0:
-                fragment = getSupportFragmentManager().findFragmentById(R.id.frame_container);
-                if(fragment!=null){
-                    getSupportFragmentManager().beginTransaction().remove(fragment).commit();
-                }
-                rv.setVisibility(View.VISIBLE);
+                mDrawerLayout.closeDrawer(mDrawerList);
                 spinner.setVisibility(View.VISIBLE);
                 mDrawerList.setSelection(0);
-                mDrawerLayout.closeDrawer(mDrawerList);
                 getSupportActionBar().setDisplayShowTitleEnabled(false);
+                fragment = new FragmentShowOffers();
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frame_container, fragment).commit();
                 break;
             case 1:
-                //remove offers
-                rv.setVisibility(View.GONE);
-                //remove spinner
-                spinner.setVisibility(View.GONE);
+                mDrawerLayout.closeDrawer(mDrawerList);
                 mDrawerList.setSelection(1);
                 getSupportActionBar().setTitle("Restaurants");
                 getSupportActionBar().setDisplayShowTitleEnabled(true);
                 fragment = new FragmentShowRestaurants();
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.frame_container, fragment).commit();
-                //TODO restaurant fragment
-                mDrawerLayout.closeDrawer(mDrawerList);
                 break;
             case 2:
                 // TODO
@@ -249,16 +237,11 @@ public class ActivityShowOffers extends AppCompatActivity implements
         } else {
             mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         }
-
-
-        if (mLastLocation != null) {
-            //compute distance in meters in distance[0]
-            for (int i = 0; i < offers.size(); i++) {
-                Location.distanceBetween(mLastLocation.getLatitude(), mLastLocation.getLongitude(),
-                        offers.get(i).getRestaurantLatitude(), offers.get(i).getRestaurantLongitude(), offers.get(i).distance);
-            }
-            Collections.sort(offers, new OfferDistanceComparator());
-            cardAdapter.notifyDataSetChanged();
+        //if a fragment with offers has already been created updates the view
+        FragmentShowOffers fo = (FragmentShowOffers)getSupportFragmentManager().findFragmentById(R.id.frame_container);
+        if(fo!=null){
+            fo.updateDistance();
+            fo.sortByDistance();
         }
 
     }
@@ -299,6 +282,11 @@ public class ActivityShowOffers extends AppCompatActivity implements
     protected void onStop() {
         mGoogleApiClient.disconnect();
         super.onStop();
+    }
+
+    //this get method is used by fragments inside this activity
+    public Location getLocation(){
+        return this.mLastLocation;
     }
 
 }
