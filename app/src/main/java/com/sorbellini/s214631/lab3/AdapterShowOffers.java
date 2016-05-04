@@ -1,6 +1,9 @@
 package com.sorbellini.s214631.lab3;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -64,6 +69,22 @@ public class AdapterShowOffers extends RecyclerView.Adapter<AdapterShowOffers.Of
         offerViewHolder.offerPrice.setText(String.format(Locale.getDefault(),"%d", offers.get(i).getPrice()));
         float km = offers.get(i).distance[0]/1000;
         offerViewHolder.offerDistance.setText(String.format(Locale.getDefault(),"%.1f", km));
+        offerViewHolder.cv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //save current offer in shared preferences
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(v.getContext());
+                SharedPreferences.Editor editor = prefs.edit();
+                Gson gson = new Gson();
+                DailyOffer offer = offers.get(offerViewHolder.getAdapterPosition());
+                String json = gson.toJson(offer);
+                editor.putString("offer", json);
+                editor.commit();
+                //call activity to display details
+                Intent i = new Intent(v.getContext(), OfferDetails.class);
+                v.getContext().startActivity(i);
+            }
+        });
 
     }
 
