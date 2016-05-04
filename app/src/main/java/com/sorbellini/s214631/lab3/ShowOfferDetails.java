@@ -3,6 +3,7 @@ package com.sorbellini.s214631.lab3;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -15,6 +16,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.support.v4.app.DialogFragment;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
@@ -31,6 +33,7 @@ public class ShowOfferDetails extends AppCompatActivity {
     private Calendar myCalendar;
     static final int DIALOG_ID = 0;
     int xyear,xmonth,xday;
+    int xhour,xminute;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,9 +73,31 @@ public class ShowOfferDetails extends AppCompatActivity {
                     public void onClick(View v){
                         showDialog(DIALOG_ID);
                     }
-
                 }
         );
+
+
+    }
+
+    private void createTimePicker() {
+        Calendar mcurrentTime = Calendar.getInstance();
+        int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+        int minute = mcurrentTime.get(Calendar.MINUTE);
+        TimePickerDialog mTimePicker;
+
+        mTimePicker = new TimePickerDialog(ShowOfferDetails.this, 4, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            // CLEMENT : si tu veux changer le design de l'horloge il faut que tu changes le nombre au-dessus
+            // De 1 à 3, c'est des spinner et après c'est des horloges
+            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                //eReminderTime.setText( selectedHour + ":" + selectedMinute);
+                xhour = selectedHour;
+                xminute = selectedMinute;
+                Toast.makeText(ShowOfferDetails.this,xhour + " : "+ xminute, Toast.LENGTH_LONG).show();
+            }
+        }, hour, minute, true);//Yes 24 hour time
+        mTimePicker.setTitle("Select Time");
+        mTimePicker.show();
     }
 
     @Override
@@ -89,8 +114,14 @@ public class ShowOfferDetails extends AppCompatActivity {
             xmonth = monthOfYear + 1; // by default it begins on 0
             xday = dayOfMonth;
             Toast.makeText(ShowOfferDetails.this,xyear+ " / "+ xmonth +" / "+xday,Toast.LENGTH_LONG).show();
+            createTimePicker();
         }
+
     };
+
+
+
+
 
 }
 
