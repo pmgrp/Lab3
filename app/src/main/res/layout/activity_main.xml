@@ -7,6 +7,9 @@
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_spinner"
         android:layout_width="match_parent"
@@ -14,16 +17,16 @@
         android:background="@color/colorPrimary"
         app:theme="@style/ToolbarTheme"
         app:popupTheme="@style/Theme.AppCompat">
+    </android.support.v7.widget.Toolbar>
         <Spinner
             android:id="@+id/spinner"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_centerInParent="true"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:entries="@array/spinner_options">
-
         </Spinner>
-    </android.support.v7.widget.Toolbar>
-
+    </RelativeLayout>
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
