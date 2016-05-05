@@ -6,5 +6,7 @@
     android:paddingLeft="16dp"
     android:paddingRight="4dp"
     android:textColor="#ffffffff"
+    android:drawablePadding="8dp"
+    android:drawableRight="@android:drawable/arrow_down_float"
     android:textSize="18dp"
     android:textStyle="bold"/>
