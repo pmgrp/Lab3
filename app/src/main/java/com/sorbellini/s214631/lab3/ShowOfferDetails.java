@@ -6,7 +6,9 @@ import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +20,8 @@ import android.widget.EditText;
 import android.support.v4.app.DialogFragment;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -45,9 +49,18 @@ public class ShowOfferDetails extends AppCompatActivity {
         xmonth = cal.get(Calendar.MONTH);
         xday = cal.get(Calendar.DAY_OF_MONTH);
 
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        Gson gson = new Gson();
+        String json = preferences.getString("offer", null);
+        if(json != null)
+            dailyOffer = gson.fromJson(json, DailyOffer.class);
+
+
 
         showDialogOnButtonClick();
 
+        
+        /*
         DailyOffer off1 = new DailyOffer();
         this.dailyOffer = off1;
         Uri uri = Uri.parse("android.resource://com.sorbellini.s214631.lab3/drawable/pizza");
@@ -60,6 +73,7 @@ public class ShowOfferDetails extends AppCompatActivity {
         off1.setRestaurantLatitude(41.90278); //Rome
         off1.setRestaurantLongitude(12.49637);
         off1.setRestaurantName("Da Gennaro");
+        */
     }
 
 
