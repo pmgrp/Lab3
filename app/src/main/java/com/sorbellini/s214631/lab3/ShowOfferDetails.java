@@ -18,6 +18,8 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.support.v4.app.DialogFragment;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -52,8 +54,19 @@ public class ShowOfferDetails extends AppCompatActivity {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         Gson gson = new Gson();
         String json = preferences.getString("offer", null);
-        if(json != null)
+        if(json != null) {
             dailyOffer = gson.fromJson(json, DailyOffer.class);
+            ImageView imageView = (ImageView) findViewById(R.id.offer_details_image);
+            imageView.setImageURI(Uri.parse(dailyOffer.getPhoto()));
+
+            TextView textView = (TextView) findViewById(R.id.offer_details_name);
+            textView.setText(dailyOffer.getName());
+            textView = (TextView) findViewById(R.id.offer_details_price);
+            textView.setText(String.format(Locale.getDefault(), "%d", dailyOffer.getPrice()));
+            textView = (TextView) findViewById(R.id.offer_details_description);
+            textView.setText(dailyOffer.getDescription());
+        }
+
 
 
 

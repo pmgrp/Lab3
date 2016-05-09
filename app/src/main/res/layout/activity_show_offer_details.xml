@@ -22,7 +22,7 @@
         <ImageView
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:id="@+id/imageOffer"
+            android:id="@+id/offer_details_image"
             android:layout_gravity="center_horizontal"
             android:src="@mipmap/ic_launcher"
             />
@@ -66,13 +66,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/hint_offer_name"
+                android:id="@+id/offer_details_name"
                 android:hint="@string/hint_offer_name"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/hint_price"
+                android:id="@+id/offer_details_price"
                 android:hint="10€"
                 android:paddingLeft="175dp"/>
 
@@ -106,7 +106,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/total_description"
                 android:textSize="15sp"
-                android:id="@+id/textViewDescription"
+                android:id="@+id/offer_details_description"
                 android:outlineProvider="bounds"
                 android:visibility="visible" />
         </FrameLayout>
