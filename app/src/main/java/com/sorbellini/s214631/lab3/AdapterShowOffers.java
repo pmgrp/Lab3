@@ -23,6 +23,7 @@ import java.util.Locale;
  */
 public class AdapterShowOffers extends RecyclerView.Adapter<AdapterShowOffers.OfferViewHolder> {
 
+
     ArrayList<DailyOffer> offers;
 
     AdapterShowOffers(ArrayList<DailyOffer> offers){

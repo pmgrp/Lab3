@@ -12,7 +12,9 @@ import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -51,15 +53,18 @@ public class ShowOfferDetails extends AppCompatActivity {
         xyear = cal.get(Calendar.YEAR);
         xmonth = cal.get(Calendar.MONTH);
         xday = cal.get(Calendar.DAY_OF_MONTH);
-        Log.d("TAG", "acquire preferences");
+
+
+        getSupportActionBar().setTitle("Offer Details");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         Gson gson = new Gson();
 
         String json = preferences.getString("offer", null);
         if(json != null) {
-            Log.d("TAG", "enter in if");
             dailyOffer = gson.fromJson(json, DailyOffer.class);
+
             ImageView imageView = (ImageView) findViewById(R.id.offer_details_image);
             imageView.setImageURI(Uri.parse(dailyOffer.getPhoto()));
 
@@ -71,26 +76,8 @@ public class ShowOfferDetails extends AppCompatActivity {
             textView.setText(dailyOffer.getDescription());
         }
 
-
-
-
         showDialogOnButtonClick();
 
-        
-        /*
-        DailyOffer off1 = new DailyOffer();
-        this.dailyOffer = off1;
-        Uri uri = Uri.parse("android.resource://com.sorbellini.s214631.lab3/drawable/pizza");
-        String imagePath = uri.toString();
-        off1.setID("1");
-        off1.setRestaurantID("1");
-        off1.setPhoto(imagePath);
-        off1.setName("Pizza");
-        off1.setPrice(10);
-        off1.setRestaurantLatitude(41.90278); //Rome
-        off1.setRestaurantLongitude(12.49637);
-        off1.setRestaurantName("Da Gennaro");
-        */
     }
 
 
@@ -131,6 +118,7 @@ public class ShowOfferDetails extends AppCompatActivity {
         mTimePicker.show();
     }
 
+
     @Override
     protected Dialog onCreateDialog(int id) {
         if (id == DIALOG_ID)
@@ -153,8 +141,8 @@ public class ShowOfferDetails extends AppCompatActivity {
 
 
 
-
 }
+
 
 
 
