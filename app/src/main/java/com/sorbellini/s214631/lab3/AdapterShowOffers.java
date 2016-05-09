@@ -81,7 +81,7 @@ public class AdapterShowOffers extends RecyclerView.Adapter<AdapterShowOffers.Of
                 editor.putString("offer", json);
                 editor.commit();
                 //call activity to display details
-                Intent i = new Intent(v.getContext(), OfferDetails.class);
+                Intent i = new Intent(v.getContext(), ShowOfferDetails.class);
                 v.getContext().startActivity(i);
             }
         });

@@ -12,6 +12,7 @@ import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -50,11 +51,14 @@ public class ShowOfferDetails extends AppCompatActivity {
         xyear = cal.get(Calendar.YEAR);
         xmonth = cal.get(Calendar.MONTH);
         xday = cal.get(Calendar.DAY_OF_MONTH);
+        Log.d("TAG", "acquire preferences");
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         Gson gson = new Gson();
+
         String json = preferences.getString("offer", null);
         if(json != null) {
+            Log.d("TAG", "enter in if");
             dailyOffer = gson.fromJson(json, DailyOffer.class);
             ImageView imageView = (ImageView) findViewById(R.id.offer_details_image);
             imageView.setImageURI(Uri.parse(dailyOffer.getPhoto()));
