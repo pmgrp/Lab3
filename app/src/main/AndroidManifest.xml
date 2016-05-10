@@ -21,8 +21,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".OfferDetails" />
-        <activity android:name=".ShowOfferDetails"></activity>
+        <activity
+            android:name=".ShowOfferDetails"
+            android:label="@string/title_show_offer_details"
+            android:parentActivityName=".ActivityMain"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.sorbellini.s214631.lab3.ActivityMain" />
+        </activity>
+        <activity android:name=".ShowReservationDetails"></activity>
     </application>
 
 </manifest>

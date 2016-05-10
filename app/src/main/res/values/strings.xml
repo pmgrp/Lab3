@@ -7,6 +7,9 @@
     <string name="price_offer">Price</string>
     <string name="restaurant_details">Restaurant Details</string>
     <string name="hint_offer_name">Name of the offer</string>
+    <string name="title_show_offer_details">Offer Details</string>
+    <string name="reservation_details_date">Date</string>
+    <string name="hint_reservation_details_date">01/01/01</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -1,26 +1,16 @@
 package com.sorbellini.s214631.lab3;
 
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.preference.PreferenceManager;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Menu;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
-import android.support.v4.app.DialogFragment;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -28,7 +18,6 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -54,8 +43,6 @@ public class ShowOfferDetails extends AppCompatActivity {
         xmonth = cal.get(Calendar.MONTH);
         xday = cal.get(Calendar.DAY_OF_MONTH);
 
-
-        getSupportActionBar().setTitle("Offer Details");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -68,9 +55,9 @@ public class ShowOfferDetails extends AppCompatActivity {
             ImageView imageView = (ImageView) findViewById(R.id.offer_details_image);
             imageView.setImageURI(Uri.parse(dailyOffer.getPhoto()));
 
-            TextView textView = (TextView) findViewById(R.id.offer_details_name);
+            TextView textView = (TextView) findViewById(R.id.reservation_details_offer);
             textView.setText(dailyOffer.getName());
-            textView = (TextView) findViewById(R.id.offer_details_price);
+            textView = (TextView) findViewById(R.id.reservation_details_price);
             textView.setText(String.format(Locale.getDefault(), "%d", dailyOffer.getPrice()));
             textView = (TextView) findViewById(R.id.offer_details_description);
             textView.setText(dailyOffer.getDescription());

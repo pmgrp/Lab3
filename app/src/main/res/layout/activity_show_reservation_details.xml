@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.sorbellini.s214631.lab3.ShowOfferDetails">
+    tools:context="com.sorbellini.s214631.lab3.ShowReservationDetails">
 
 
     <RelativeLayout
@@ -19,7 +19,7 @@
         <ImageView
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:id="@+id/offer_details_image"
+            android:id="@+id/reservation_details_image"
             android:layout_gravity="center_horizontal"
             android:src="@mipmap/ic_launcher"
             android:layout_alignParentTop="true"
@@ -35,7 +35,7 @@
             android:text="@string/name_offer"
             android:textSize="20sp"
             android:textColor="@color/colorPrimaryDark"
-            android:layout_below="@+id/offer_details_image"
+            android:layout_below="@+id/reservation_details_image"
             android:layout_alignParentLeft="true"/>
 
         <TextView
@@ -57,13 +57,13 @@
             android:layout_alignParentRight="true"
             android:paddingRight="40dp"
             android:textColor="@color/colorPrimaryDark"
-            android:layout_below="@+id/offer_details_image"/>
+            android:layout_below="@+id/reservation_details_image"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/reservation_details_price"
-            android:hint="price"
+            android:hint="Price"
             android:layout_below="@+id/reservation_details_offer_price"
             android:layout_alignParentRight="true"
             android:paddingRight="40dp"
@@ -76,7 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:id="@+id/offer_description"
-            android:text="@string/description_offer"
+            android:text="@string/reservation_details_date"
             android:textSize="20sp"
             android:textColor="@color/colorPrimaryDark"
             android:layout_below="@+id/reservation_details_offer"
@@ -84,15 +84,11 @@
 
         <TextView
             android:layout_below="@id/offer_description"
-            android:layout_width="250dp"
-            android:layout_height="100dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/total_description"
-            android:textSize="15sp"
-            android:id="@+id/offer_details_description"
-            android:outlineProvider="bounds"
-            android:background="@drawable/rectangle"
-            android:visibility="visible" />
+            android:text="@string/hint_reservation_details_date"
+            android:id="@+id/reservation_details_date_time"/>
 
 
 
@@ -117,7 +113,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"/>
-        
+
 
     </RelativeLayout>
 </RelativeLayout>
