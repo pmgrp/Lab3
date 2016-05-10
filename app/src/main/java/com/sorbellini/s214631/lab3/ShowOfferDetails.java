@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -62,6 +63,9 @@ public class ShowOfferDetails extends AppCompatActivity {
             textView.setText(String.format(Locale.getDefault(), "%d", dailyOffer.getPrice()) + " €");
             textView = (TextView) findViewById(R.id.offer_details_description);
             textView.setText(dailyOffer.getDescription());
+
+            Button button = (Button) findViewById(R.id.offer_details_button_restaurant);
+            button.setText(dailyOffer.getRestaurantName());
         }
 
         showDialogOnButtonClick();

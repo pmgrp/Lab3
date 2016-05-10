@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="20dp"
-            android:id="@+id/reservation_details_offer"
+            android:id="@+id/reservation_details_offer_name"
             android:hint="@string/hint_offer_name"
             android:textColorHint="@color/colorPrimaryDark"
             android:layout_below="@+id/reservation_details_image"
@@ -65,7 +65,7 @@
             android:text="@string/reservation_details_date"
             android:textSize="22sp"
             android:textColor="@color/grey"
-            android:layout_below="@+id/reservation_details_offer"
+            android:layout_below="@+id/reservation_details_offer_name"
             />
 
 
@@ -113,7 +113,8 @@
             android:text="@string/restaurant_details"
             android:textAlignment="center"
             android:textStyle="bold"
-            android:id="@+id/button_restaurant_details"
+            android:textColor="@color/button_text_color"
+            android:id="@+id/restaurant_details_button_restaurant"
             android:background="#009dff"
             android:layout_alignParentLeft="true"
             android:layout_alignParentBottom="true"/>
@@ -126,6 +127,7 @@
             android:text="@string/offer_description_button"
             android:textAlignment="center"
             android:textStyle="bold"
+            android:textColor="@color/button_text_color"
             android:id="@+id/offer_description_button"
             android:background="#009dff"
             android:onClick="goToOfferDescription"
