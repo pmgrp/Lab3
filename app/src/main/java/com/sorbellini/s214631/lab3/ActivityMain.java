@@ -41,12 +41,33 @@ public class ActivityMain extends AppCompatActivity implements
     boolean mDrawerClick;
     //spinner
     Spinner spinner;
+    //used to pre
+    int current_fragment=0;
+    int spinner_position=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //to know after a screen rotation what was current fragment in view
+        if(savedInstanceState != null){
+            current_fragment = savedInstanceState.getInt("current_fragment");
+            spinner_position = savedInstanceState.getInt("spinner_position");
+        }
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_spinner);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
+        /**
+         * Set Api for location
+         */
+
+        if (mGoogleApiClient == null) {
+            // Building the GoogleApi client
+            buildGoogleApiClient();
+        }
+
         /**
          * Drawer (The side menu)
          */
@@ -87,16 +108,14 @@ public class ActivityMain extends AppCompatActivity implements
             }
         };
         mDrawerLayout.addDrawerListener(mDrawerToggle);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
         mDrawerToggle.syncState();
 
         /**
          * Spinner (the switch on the toolbar)
-         */
+         *
+         * */
         spinner = (Spinner) findViewById(R.id.spinner);
-        ArrayAdapter spinnerAdapter = ArrayAdapter.createFromResource(getApplicationContext(), R.array.spinner_options, R.layout.spinner_item);
+        final ArrayAdapter spinnerAdapter = ArrayAdapter.createFromResource(getApplicationContext(), R.array.spinner_options, R.layout.spinner_item);
         spinnerAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         spinner.setAdapter(spinnerAdapter);
         if (spinner != null) {
@@ -108,42 +127,63 @@ public class ActivityMain extends AppCompatActivity implements
                     switch (position) {
                         case 0:
                             //offers ordered by distance
-                            fo = (FragmentShowOffers) getSupportFragmentManager().findFragmentById(R.id.frame_container);
-                            if(fo != null)
+                            //fo = (FragmentShowOffers) getSupportFragmentManager().findFragmentById(R.id.frame_container);
+                            fo = (FragmentShowOffers) getSupportFragmentManager().findFragmentByTag("OFFERS");
+                            if(fo != null) {
+                                //fo.updateDistance();
                                 fo.sortByDistance();
+                            }
+                            spinner_position = 0;
                             break;
                         case 1:
                             //offers ordered by price
-                            fo = (FragmentShowOffers) getSupportFragmentManager().findFragmentById(R.id.frame_container);
-                            if(fo != null)
+                            //fo = (FragmentShowOffers) getSupportFragmentManager().findFragmentById(R.id.frame_container);
+                            fo = (FragmentShowOffers) getSupportFragmentManager().findFragmentByTag("OFFERS");
+                            if(fo != null) {
+                                //fo.updateDistance();
                                 fo.sortByPrice();
+                            }
+                            spinner_position = 1;
                             break;
                     }
                 }
 
                 @Override
                 public void onNothingSelected(AdapterView<?> parentView) {
-                    //
+                    FragmentShowOffers fo;
+                    fo = (FragmentShowOffers) getSupportFragmentManager().findFragmentByTag("OFFERS");
+                    if(fo != null) {
+                        //fo.updateDistance();
+                        fo.sortByDistance();
+                    }
+                    spinner_position = 0;
                 }
 
             });
         }
 
         /**
-         * Set Api for location and place Offers fragment
+         * populate view according to current fragment
          */
-
-        if (mGoogleApiClient == null) {
-            // Building the GoogleApi client
-            buildGoogleApiClient();
+        switch (current_fragment) {
+            //activity has been just created
+            case 0:
+                getSupportActionBar().setTitle("Offers");
+                FragmentShowOffers fragment = new FragmentShowOffers();
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frame_container, fragment, "OFFERS").commit();
+                break;
+            //offer fragment is the one in the view
+            case 1:
+                spinner.setVisibility(View.VISIBLE);
+                getSupportActionBar().setTitle("Offers");
+                break;
+            //restaurant fragment is the one in the view
+            case 2:
+                spinner.setVisibility(View.GONE);
+                getSupportActionBar().setTitle("Restaurants");
+                break;
         }
-
-        //Offers take the place of frame container
-        getSupportActionBar().setTitle("Offers");
-        Fragment fragment = new FragmentShowOffers();
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.frame_container, fragment).commit();
-
     }
 
     /**
@@ -176,19 +216,22 @@ public class ActivityMain extends AppCompatActivity implements
                 spinner.setVisibility(View.VISIBLE);
                 mDrawerList.setSelection(0);
                 getSupportActionBar().setTitle("Offers");
-                getSupportActionBar().setDisplayShowTitleEnabled(true);
+                //getSupportActionBar().setDisplayShowTitleEnabled(true);
                 fragment = new FragmentShowOffers();
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frame_container, fragment).commit();
+                        .replace(R.id.frame_container, fragment, "OFFERS").commit();
+                current_fragment = 1;
                 break;
             case 1:
                 //mDrawerLayout.closeDrawer(mDrawerList);
+                spinner.setVisibility(View.GONE);
                 mDrawerList.setSelection(1);
                 getSupportActionBar().setTitle("Restaurants");
-                getSupportActionBar().setDisplayShowTitleEnabled(true);
+                //getSupportActionBar().setDisplayShowTitleEnabled(true);
                 fragment = new FragmentShowRestaurants();
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frame_container, fragment).commit();
+                        .replace(R.id.frame_container, fragment, "RESTAURANTS").commit();
+                current_fragment = 2;
                 break;
             case 2:
                 // TODO
@@ -245,10 +288,21 @@ public class ActivityMain extends AppCompatActivity implements
             mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         }
         //if a fragment with offers has already been created updates the view
-        FragmentShowOffers fo = (FragmentShowOffers)getSupportFragmentManager().findFragmentById(R.id.frame_container);
+        FragmentShowOffers fo = (FragmentShowOffers)getSupportFragmentManager().findFragmentByTag("OFFERS");
         if(fo!=null){
             fo.updateDistance();
-            fo.sortByDistance();
+            switch (spinner_position) {
+                case 0:
+                    fo.sortByDistance();
+                    break;
+                case 1:
+                    break;
+            }
+        }
+        FragmentShowRestaurants fr = (FragmentShowRestaurants) getSupportFragmentManager().findFragmentByTag("RESTAURANTS");
+        if(fr!=null){
+            fr.updateDistance();
+            fr.sortByDistance();
         }
 
     }
@@ -291,9 +345,17 @@ public class ActivityMain extends AppCompatActivity implements
         super.onStop();
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putInt("current_fragment", current_fragment);
+        outState.putInt("spinner_position", spinner_position);
+        super.onSaveInstanceState(outState);
+    }
+
     //this get method is used by fragments inside this activity
     public Location getLocation(){
         return this.mLastLocation;
     }
+    public int getSpinnerPosition() {return this.spinner_position;}
 
 }
