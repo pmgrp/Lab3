@@ -111,18 +111,18 @@ public class DataGen {
         res1.setComment("I will need a big table");
 
         Reservation res2 = new Reservation();
-        res1.setCustomer(cus1);
-        res1.setDailyOffer(off2);
-        res1.setStatus(Reservation.ARRIVED);
-        res1.setTime("13:30");
-        res1.setComment("I may be in late");
+        res2.setCustomer(cus1);
+        res2.setDailyOffer(off2);
+        res2.setStatus(Reservation.ARRIVED);
+        res2.setTime("13:30");
+        res2.setComment("I may be in late");
 
         Reservation res3 = new Reservation();
-        res1.setCustomer(cus1);
-        res1.setDailyOffer(off3);
-        res1.setStatus(Reservation.ARRIVED);
-        res1.setTime("14:00");
-        res1.setComment("");
+        res3.setCustomer(cus1);
+        res3.setDailyOffer(off3);
+        res3.setStatus(Reservation.ARRIVED);
+        res3.setTime("14:00");
+        res3.setComment("");
 
         ArrayList<Reservation> reservations = new ArrayList<>();
         reservations.add(res1);

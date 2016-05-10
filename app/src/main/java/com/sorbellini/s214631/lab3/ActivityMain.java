@@ -28,7 +28,8 @@ public class ActivityMain extends AppCompatActivity implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         FragmentShowRestaurants.FragmentListener,
-        FragmentShowOffers.FragmentListener{
+        FragmentShowOffers.FragmentListener,
+        FragmentShowReservations.FragmentListener{
 
     private GoogleApiClient mGoogleApiClient;
     private Location mLastLocation;
@@ -173,16 +174,20 @@ public class ActivityMain extends AppCompatActivity implements
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.frame_container, fragment, "OFFERS").commit();
                 break;
-            //offer fragment is the one in the view
+            //offers fragment is the one in the view
             case 1:
                 spinner.setVisibility(View.VISIBLE);
                 getSupportActionBar().setTitle("Offers");
                 break;
-            //restaurant fragment is the one in the view
+            //restaurants fragment is the one in the view
             case 2:
                 spinner.setVisibility(View.GONE);
                 getSupportActionBar().setTitle("Restaurants");
                 break;
+            //reservations fragment is the one in the view
+            case 3:
+                spinner.setVisibility(View.GONE);
+                getSupportActionBar().setTitle("Reservations");
         }
     }
 
@@ -234,7 +239,13 @@ public class ActivityMain extends AppCompatActivity implements
                 current_fragment = 2;
                 break;
             case 2:
-                // TODO
+                spinner.setVisibility(View.GONE);
+                mDrawerList.setSelection(1);
+                getSupportActionBar().setTitle("Reservations");
+                fragment = new FragmentShowReservations();
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frame_container, fragment, "RESERVATIONS").commit();
+                current_fragment = 3;
                 break;
             case 3:
                 // TODO
