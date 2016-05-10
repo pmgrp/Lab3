@@ -9,6 +9,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -20,6 +24,7 @@ public class FragmentShowOffers extends Fragment {
     ArrayList<DailyOffer> offers;
     FragmentListener mCallback;
     Location mLastLocation;
+    int spinner_position;
 
     public FragmentShowOffers() {
         // Required empty public constructor
@@ -28,6 +33,7 @@ public class FragmentShowOffers extends Fragment {
     //implements an interface to retrieve location from activity
     public interface FragmentListener {
         Location getLocation();
+        int getSpinnerPosition();
     }
 
     @Override
@@ -73,7 +79,15 @@ public class FragmentShowOffers extends Fragment {
         cardAdapter = new AdapterShowOffers(offers);
         rv.setAdapter(cardAdapter);
         updateDistance();
-        sortByDistance();
+        spinner_position = mCallback.getSpinnerPosition();
+        switch (spinner_position){
+            case 0:
+                sortByDistance();
+                break;
+            case 1:
+                sortByPrice();
+                break;
+        }
     }
 
     public void updateDistance(){

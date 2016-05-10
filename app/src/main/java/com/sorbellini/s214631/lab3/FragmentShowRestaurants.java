@@ -52,21 +52,6 @@ public class FragmentShowRestaurants extends Fragment {
         super.onCreate(savedInstanceState);
         restaurants = DataGen.makeRestaurants();
 
-        //hide spinner from parent activity
-        Spinner spinner = (Spinner)getActivity().findViewById(R.id.spinner);
-        spinner.setVisibility(View.GONE);
-
-        mLastLocation = mCallback.getLocation();
-
-        if (mLastLocation != null) {
-            //compute distance in meters in distance[0]
-            for (int i = 0; i < restaurants.size(); i++) {
-                Location.distanceBetween(mLastLocation.getLatitude(), mLastLocation.getLongitude(),
-                        restaurants.get(i).getLatitude(), restaurants.get(i).getLongitude(), restaurants.get(i).distance);
-            }
-            Collections.sort(restaurants, new RestaurantDistanceComparator());
-        }
-
     }
 
     @Override
@@ -85,6 +70,26 @@ public class FragmentShowRestaurants extends Fragment {
         rv.setLayoutManager(llm);
         cardAdapter = new AdapterShowRestaurants(restaurants);
         rv.setAdapter(cardAdapter);
+        updateDistance();
+        sortByDistance();
 
+    }
+
+    public void updateDistance(){
+        mLastLocation = mCallback.getLocation();
+        if (mLastLocation != null) {
+            //compute distance in meters in distance[0]
+            for (int i = 0; i < restaurants.size(); i++) {
+                Location.distanceBetween(mLastLocation.getLatitude(), mLastLocation.getLongitude(),
+                        restaurants.get(i).getLatitude(), restaurants.get(i).getLongitude(), restaurants.get(i).distance);
+            }
+        }
+    }
+
+    public void sortByDistance() {
+        if (restaurants != null)
+            Collections.sort(restaurants, new RestaurantDistanceComparator());
+        if (cardAdapter != null)
+            cardAdapter.notifyDataSetChanged();
     }
 }
