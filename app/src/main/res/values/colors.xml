@@ -11,4 +11,6 @@
     <color name="status_confirmed">#c1edff</color>
     <color name="status_completed">#d6ffd2</color>
     <color name="status_rejected">#ffcfcf</color>
+    <color name="lightgrey">#D3D3D3</color>
+    <color name="grey">#5A5E6B</color>
 </resources>

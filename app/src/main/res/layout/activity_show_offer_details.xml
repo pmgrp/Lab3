@@ -27,47 +27,32 @@
             />
 
 
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/reservation_details_offer_name"
-            android:text="@string/name_offer"
-            android:textSize="20sp"
-            android:textColor="@color/colorPrimaryDark"
-            android:layout_below="@+id/offer_details_image"
-            android:layout_alignParentLeft="true"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/reservation_details_offer"
+            android:paddingTop="20dp"
+            android:id="@+id/offer_details_offer_name"
             android:hint="@string/hint_offer_name"
-            android:layout_below="@+id/reservation_details_offer_name"
-            android:textAppearance="?android:attr/textAppearanceLarge"/>
+            android:textColorHint="@color/colorPrimaryDark"
+            android:layout_below="@id/offer_details_image"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimaryDark"/>
 
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/reservation_details_offer_price"
-            android:text="@string/price_offer"
-            android:textSize="20sp"
+            android:paddingTop="20dp"
+            android:id="@+id/offer_details_price"
+            android:hint="@string/hint_price"
+            android:textColorHint="@color/colorPrimaryDark"
+            android:layout_below="@+id/offer_details_image"
             android:layout_alignParentRight="true"
-            android:paddingRight="40dp"
-            android:textColor="@color/colorPrimaryDark"
-            android:layout_below="@+id/offer_details_image"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/reservation_details_price"
-            android:hint="price"
-            android:layout_below="@+id/reservation_details_offer_price"
-            android:layout_alignParentRight="true"
-            android:paddingRight="40dp"
-            android:textAppearance="?android:attr/textAppearanceLarge"/>
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimaryDark"/>
 
 
 
@@ -77,21 +62,21 @@
             android:layout_marginTop="20dp"
             android:id="@+id/offer_description"
             android:text="@string/description_offer"
-            android:textSize="20sp"
-            android:textColor="@color/colorPrimaryDark"
-            android:layout_below="@+id/reservation_details_offer"
-            />
+            android:textSize="22sp"
+            android:textColor="@color/colorPrimary"
+            android:layout_below="@+id/offer_details_offer_name"/>
 
         <TextView
             android:layout_below="@id/offer_description"
-            android:layout_width="250dp"
-            android:layout_height="100dp"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/total_description"
-            android:textSize="15sp"
+            android:textSize="18sp"
             android:id="@+id/offer_details_description"
             android:outlineProvider="bounds"
             android:background="@drawable/rectangle"
+            android:backgroundTint="@color/lightgrey"
             android:visibility="visible" />
 
 
@@ -99,9 +84,11 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="15dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:text="@string/restaurant_details"
             android:textAlignment="center"
+            android:textStyle="bold"
             android:id="@+id/button_restaurant_details"
             android:background="#009dff"
             android:layout_alignParentLeft="true"
@@ -110,7 +97,9 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="BUY"
+            android:text="@string/buy_button"
+            android:textAlignment="center"
+            android:textStyle="bold"
             android:id="@+id/button_buy"
             android:background="#009dff"
             android:onClick="buyButton"

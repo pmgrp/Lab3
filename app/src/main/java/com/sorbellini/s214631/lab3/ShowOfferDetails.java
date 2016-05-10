@@ -43,7 +43,8 @@ public class ShowOfferDetails extends AppCompatActivity {
         xmonth = cal.get(Calendar.MONTH);
         xday = cal.get(Calendar.DAY_OF_MONTH);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         Gson gson = new Gson();
@@ -55,10 +56,10 @@ public class ShowOfferDetails extends AppCompatActivity {
             ImageView imageView = (ImageView) findViewById(R.id.offer_details_image);
             imageView.setImageURI(Uri.parse(dailyOffer.getPhoto()));
 
-            TextView textView = (TextView) findViewById(R.id.reservation_details_offer);
+            TextView textView = (TextView) findViewById(R.id.offer_details_offer_name);
             textView.setText(dailyOffer.getName());
-            textView = (TextView) findViewById(R.id.reservation_details_price);
-            textView.setText(String.format(Locale.getDefault(), "%d", dailyOffer.getPrice()));
+            textView = (TextView) findViewById(R.id.offer_details_price);
+            textView.setText(String.format(Locale.getDefault(), "%d", dailyOffer.getPrice()) + " €");
             textView = (TextView) findViewById(R.id.offer_details_description);
             textView.setText(dailyOffer.getDescription());
         }
@@ -67,6 +68,12 @@ public class ShowOfferDetails extends AppCompatActivity {
 
     }
 
+
+    /*
+    public void goToRestaurantDescription(View view) {
+
+    }
+    */
 
 
     public void showDialogOnButtonClick() {
