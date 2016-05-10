@@ -1,6 +1,9 @@
 package com.sorbellini.s214631.lab3;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -53,26 +58,42 @@ public class AdapterShowReservations extends RecyclerView.Adapter<AdapterShowRes
     }
 
     @Override
-    public void onBindViewHolder(final ReservationViewHolder restaurantViewHolder, int i) {
+    public void onBindViewHolder(final ReservationViewHolder reservationViewHolder, int i) {
 
-        restaurantViewHolder.offerName.setText(reservations.get(i).getDailyOffer().getName());
-        restaurantViewHolder.restaurantName.setText(reservations.get(i).getDailyOffer().getRestaurantName());
-        restaurantViewHolder.time.setText(reservations.get(i).getTime());
+        reservationViewHolder.offerName.setText(reservations.get(i).getDailyOffer().getName());
+        reservationViewHolder.restaurantName.setText(reservations.get(i).getDailyOffer().getRestaurantName());
+        reservationViewHolder.time.setText(reservations.get(i).getTime());
         int status = reservations.get(i).getStatus();
         switch (status) {
             case Reservation.ARRIVED:
-                restaurantViewHolder.status.setText("To Be Approved");
+                reservationViewHolder.status.setText("To Be Approved");
                 break;
             case Reservation.CONFIRMED:
-                restaurantViewHolder.status.setText("Approved");
+                reservationViewHolder.status.setText("Approved");
                 break;
             case Reservation.COMPLETED:
-                restaurantViewHolder.status.setText("Completed");
+                reservationViewHolder.status.setText("Completed");
                 break;
             case Reservation.REJECTED:
-                restaurantViewHolder.status.setText("Rejected");
+                reservationViewHolder.status.setText("Rejected");
                 break;
         }
+        reservationViewHolder.cv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //save current offer in shared preferences
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(v.getContext());
+                SharedPreferences.Editor editor = prefs.edit();
+                Gson gson = new Gson();
+                Reservation reservation = reservations.get(reservationViewHolder.getAdapterPosition());
+                String json = gson.toJson(reservation);
+                editor.putString("reservation", json);
+                editor.commit();
+                //call activity to display details
+                Intent i = new Intent(v.getContext(), ShowReservationDetails.class);
+                v.getContext().startActivity(i);
+            }
+        });
 
     }
 
