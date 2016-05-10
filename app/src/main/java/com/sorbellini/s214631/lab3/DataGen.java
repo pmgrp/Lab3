@@ -10,9 +10,11 @@ import java.util.ArrayList;
  */
 public class DataGen {
 
+    static DailyOffer off1,off2,off3,off4,off5,off6;
+
     public static ArrayList<DailyOffer> makeOffers() {
 
-        DailyOffer off1 = new DailyOffer();
+        off1 = new DailyOffer();
         Uri uri = Uri.parse("android.resource://com.sorbellini.s214631.lab3/drawable/pizza");
         String imagePath = uri.toString();
         off1.setID("1");
@@ -24,7 +26,7 @@ public class DataGen {
         off1.setRestaurantLongitude(12.49637);
         off1.setRestaurantName("Da Gennaro");
 
-        DailyOffer off2 = new DailyOffer();
+        off2 = new DailyOffer();
         uri = Uri.parse("android.resource://com.sorbellini.s214631.lab3/drawable/escargot");
         imagePath = uri.toString();
         off2.setID("2");
@@ -36,7 +38,7 @@ public class DataGen {
         off2.setRestaurantLongitude(2.35222);
         off2.setRestaurantName("Chez Léo");
 
-        DailyOffer off3 = new DailyOffer();
+        off3 = new DailyOffer();
         uri = Uri.parse("android.resource://com.sorbellini.s214631.lab3/drawable/pasta");
         imagePath = uri.toString();
         off3.setID("3");
@@ -48,7 +50,7 @@ public class DataGen {
         off3.setRestaurantLongitude(12.49637);
         off3.setRestaurantName("Da Gennaro");
 
-        DailyOffer off4 = new DailyOffer();
+        off4 = new DailyOffer();
         uri = Uri.parse("android.resource://com.sorbellini.s214631.lab3/drawable/beef");
         imagePath = uri.toString();
         off4.setID("4");
@@ -60,7 +62,7 @@ public class DataGen {
         off4.setRestaurantLongitude(2.35222);
         off4.setRestaurantName("Chez Léo");
 
-        DailyOffer off5 = new DailyOffer();
+        off5 = new DailyOffer();
         uri = Uri.parse("android.resource://com.sorbellini.s214631.lab3/drawable/chicken");
         imagePath = uri.toString();
         off5.setID("5");
@@ -72,7 +74,7 @@ public class DataGen {
         off5.setRestaurantLongitude(139.691706);
         off5.setRestaurantName("Keio Sushi");
 
-        DailyOffer off6 = new DailyOffer();
+        off6 = new DailyOffer();
         uri = Uri.parse("android.resource://com.sorbellini.s214631.lab3/drawable/sushi");
         imagePath = uri.toString();
         off6.setID("6");
@@ -92,6 +94,42 @@ public class DataGen {
         offers.add(off5);
         offers.add(off6);
         return offers;
+    }
+
+    public static ArrayList<Reservation> makeReservations(){
+
+        Customer cus1 = new Customer();
+        cus1.setName("Marco");
+        cus1.setSurname("Bianchi");
+        cus1.setPhone("3337659876");
+
+        Reservation res1 = new Reservation();
+        res1.setCustomer(cus1);
+        res1.setDailyOffer(off1);
+        res1.setStatus(Reservation.ARRIVED);
+        res1.setTime("12:00");
+        res1.setComment("I will need a big table");
+
+        Reservation res2 = new Reservation();
+        res1.setCustomer(cus1);
+        res1.setDailyOffer(off2);
+        res1.setStatus(Reservation.ARRIVED);
+        res1.setTime("13:30");
+        res1.setComment("I may be in late");
+
+        Reservation res3 = new Reservation();
+        res1.setCustomer(cus1);
+        res1.setDailyOffer(off3);
+        res1.setStatus(Reservation.ARRIVED);
+        res1.setTime("14:00");
+        res1.setComment("");
+
+        ArrayList<Reservation> reservations = new ArrayList<>();
+        reservations.add(res1);
+        reservations.add(res2);
+        reservations.add(res3);
+        return reservations;
+
     }
 
     public static ArrayList<Restaurant> makeRestaurants() {
