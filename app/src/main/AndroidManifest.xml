@@ -21,7 +21,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ShowOfferDetails"
             android:label="@string/title_show_offer_details"
@@ -32,8 +31,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.sorbellini.s214631.lab3.ActivityMain" />
         </activity>
-
-        <activity android:name=".ShowReservationDetails"
+        <activity
+            android:name=".ShowReservationDetails"
             android:label="@string/title_show_reservation_details"
             android:parentActivityName=".ActivityMain"
             android:screenOrientation="portrait"
@@ -42,8 +41,18 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.sorbellini.s214631.lab3.ActivityMain" />
         </activity>
+        <activity android:name=".ActivityRestaurantProfile"
 
+            android:theme="@style/AppTheme.Base"
+            android:parentActivityName=".ActivityMain"
+            android:screenOrientation="portrait"
+            android:label="Restaurant Profile"
+            >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.sorbellini.s214631.lab3.ActivityMain" />
 
+        </activity>
     </application>
 
 </manifest>
