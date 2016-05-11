@@ -7,9 +7,10 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.preference.PreferenceManager;
+import android.support.annotation.IntegerRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -19,8 +20,13 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.reflect.TypeToken;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
 public class ShowOfferDetails extends AppCompatActivity {
@@ -34,14 +40,14 @@ public class ShowOfferDetails extends AppCompatActivity {
     static final int DIALOG_ID = 0;
     int xyear,xmonth,xday;
     int xhour,xminute;
+    Reservation myReservation;
+    ArrayList<Reservation> reservations = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_offer_details);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_offer_details);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         final Calendar cal = Calendar.getInstance();
         xyear = cal.get(Calendar.YEAR);
@@ -109,23 +115,47 @@ public class ShowOfferDetails extends AppCompatActivity {
             @Override
             // CLEMENT : si tu veux changer le design de l'horloge il faut que tu changes le nombre au-dessus
             // De 1 à 3, c'est des spinner et après c'est des horloges
+
             public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                 //eReminderTime.setText( selectedHour + ":" + selectedMinute);
                 xhour = selectedHour;
                 xminute = selectedMinute;
-                Toast.makeText(ShowOfferDetails.this,xhour + " : "+ xminute, Toast.LENGTH_LONG).show();
+                myReservation.setTime(Integer.toString(xhour) + ":" + Integer.toString(xminute));
+
             }
         }, hour, minute, true);//Yes 24 hour time
+
+
         mTimePicker.setTitle("Select Time");
         mTimePicker.show();
+
+
+        reservations.add(myReservation);
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = preferences.edit();
+        Gson gson = new Gson();
+        JsonElement element = gson.toJsonTree(reservations, new TypeToken<List<Reservation>>(){}.getType());
+        JsonArray jsonarray = element.getAsJsonArray();
+        editor.putString("reservations", jsonarray.toString());
+        editor.commit();
+
+
     }
 
 
     @Override
     protected Dialog onCreateDialog(int id) {
-        if (id == DIALOG_ID)
-            return new DatePickerDialog(this,dpickerListener,xyear,xmonth,xday);
-        return null;
+        if (id == DIALOG_ID) {
+
+            DatePickerDialog myDatePickerDialog = new DatePickerDialog(this, dpickerListener, xyear, xmonth, xday);
+            myDatePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+
+            return myDatePickerDialog;
+           // return new DatePickerDialog(this, dpickerListener, xyear, xmonth, xday);
+        }
+        else
+            return null;
     }
 
     private DatePickerDialog.OnDateSetListener dpickerListener = new DatePickerDialog.OnDateSetListener() {
@@ -134,7 +164,13 @@ public class ShowOfferDetails extends AppCompatActivity {
             xyear = year;
             xmonth = monthOfYear + 1; // by default it begins on 0
             xday = dayOfMonth;
-            Toast.makeText(ShowOfferDetails.this,xyear+ " / "+ xmonth +" / "+xday,Toast.LENGTH_LONG).show();
+
+
+
+            myReservation = new Reservation();
+            myReservation.setDate(Integer.toString(xday) + "-" + Integer.toString(xmonth) +"-" + Integer.toString(xyear));
+            myReservation.setDailyOffer(dailyOffer);
+            myReservation.setStatus(Reservation.ARRIVED);
             createTimePicker();
         }
 
