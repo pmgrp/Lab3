@@ -10,6 +10,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.IntegerRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -48,6 +49,9 @@ public class ShowOfferDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_offer_details);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_offer_details);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         final Calendar cal = Calendar.getInstance();
         xyear = cal.get(Calendar.YEAR);
@@ -80,9 +84,9 @@ public class ShowOfferDetails extends AppCompatActivity {
         }
 
         json = preferences.getString("reservations", null);
-
         if(json != null)
-            myReservation = gson.fromJson(json, Reservation.class);
+            reservations = gson.fromJson(json, new TypeToken<List<Reservation>>() {
+            }.getType());
         else
             myReservation = new Reservation();
         
@@ -128,16 +132,16 @@ public class ShowOfferDetails extends AppCompatActivity {
                 //eReminderTime.setText( selectedHour + ":" + selectedMinute);
                 xhour = selectedHour;
                 xminute = selectedMinute;
-                myReservation.setTime(Integer.toString(xhour) + ":" + Integer.toString(xminute));
 
             }
         }, hour, minute, true);//Yes 24 hour time
-
-
         mTimePicker.setTitle("Select Time");
         mTimePicker.show();
 
+        Log.d("Hour: ", Integer.toString(xhour));
+        Log.d("Minutes: ", Integer.toString(xminute));
 
+        myReservation.setTime(Integer.toString(xhour) + ":" + Integer.toString(xminute));
         Customer dummyCustomer = new Customer();
         dummyCustomer.setName("Donald");
         dummyCustomer.setSurname("Trump");

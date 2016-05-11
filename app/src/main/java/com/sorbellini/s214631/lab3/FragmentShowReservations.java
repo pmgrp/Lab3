@@ -68,7 +68,7 @@ public class FragmentShowReservations extends Fragment {
             }.getType());
         }
         else{
-            reservations = null;
+            reservations = new ArrayList<>();
         }
 
 
