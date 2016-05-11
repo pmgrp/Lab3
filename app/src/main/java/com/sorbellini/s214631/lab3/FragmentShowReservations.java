@@ -1,9 +1,12 @@
 package com.sorbellini.s214631.lab3;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringDef;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,8 +15,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by eugeniosorbellini on 10/05/16.
@@ -52,8 +59,20 @@ public class FragmentShowReservations extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        reservations = DataGen.makeReservations();
-        Log.d("TAG", reservations.get(1).getDailyOffer().getName());
+        //reservations = DataGen.makeReservations();
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        String dataString = preferences.getString("reservations", null);
+        if (dataString != null) {
+            Gson gson = new Gson();
+            reservations = gson.fromJson(dataString, new TypeToken<List<Reservation>>() {
+            }.getType());
+        }
+        else{
+            reservations = null;
+        }
+
+
+        //Log.d("TAG", reservations.get(1).getDailyOffer().getName());
 
     }
 
