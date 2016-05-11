@@ -17,7 +17,6 @@
             android:theme="@style/AppTheme.Base">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -42,12 +41,10 @@
                 android:value="com.sorbellini.s214631.lab3.ActivityMain" />
         </activity>
         <activity android:name=".ActivityRestaurantProfile"
-
             android:theme="@style/AppTheme.Base"
             android:parentActivityName=".ActivityMain"
             android:screenOrientation="portrait"
-            android:label="Restaurant Profile"
-            >
+            android:label="Restaurant Profile">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.sorbellini.s214631.lab3.ActivityMain" />
