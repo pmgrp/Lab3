@@ -60,6 +60,7 @@ public class ShowOfferDetails extends AppCompatActivity {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         Gson gson = new Gson();
 
+
         String json = preferences.getString("offer", null);
         if(json != null) {
             dailyOffer = gson.fromJson(json, DailyOffer.class);
@@ -78,6 +79,13 @@ public class ShowOfferDetails extends AppCompatActivity {
             button.setText(dailyOffer.getRestaurantName());
         }
 
+        json = preferences.getString("reservations", null);
+
+        if(json != null)
+            myReservation = gson.fromJson(json, Reservation.class);
+        else
+            myReservation = new Reservation();
+        
         showDialogOnButtonClick();
 
     }
@@ -150,7 +158,6 @@ public class ShowOfferDetails extends AppCompatActivity {
 
     }
 
-
     @Override
     protected Dialog onCreateDialog(int id) {
         if (id == DIALOG_ID) {
@@ -174,7 +181,7 @@ public class ShowOfferDetails extends AppCompatActivity {
 
 
 
-            myReservation = new Reservation();
+
             myReservation.setDate(Integer.toString(xday) + "-" + Integer.toString(xmonth) +"-" + Integer.toString(xyear));
             myReservation.setDailyOffer(dailyOffer);
             myReservation.setStatus(Reservation.ARRIVED);
