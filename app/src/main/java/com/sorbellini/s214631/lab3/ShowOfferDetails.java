@@ -130,7 +130,14 @@ public class ShowOfferDetails extends AppCompatActivity {
         mTimePicker.show();
 
 
+        Customer dummyCustomer = new Customer();
+        dummyCustomer.setName("Donald");
+        dummyCustomer.setSurname("Trump");
+        dummyCustomer.setPhone("19247934");
+        myReservation.setCustomer(dummyCustomer);
+
         reservations.add(myReservation);
+
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = preferences.edit();
