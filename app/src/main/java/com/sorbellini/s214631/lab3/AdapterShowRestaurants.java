@@ -1,6 +1,10 @@
 package com.sorbellini.s214631.lab3;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -64,6 +70,22 @@ public class AdapterShowRestaurants extends RecyclerView.Adapter<AdapterShowRest
         restaurantViewHolder.restaurantAddress.setText(restaurants.get(i).getRestaurantAddress());
         float km = restaurants.get(i).distance[0] / 1000;
         restaurantViewHolder.restaurantDistance.setText(String.format(Locale.getDefault(), "%.1f", km));
+        restaurantViewHolder.cv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //save current restaurant in shared preferences
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(v.getContext());
+                SharedPreferences.Editor editor = prefs.edit();
+                Gson gson = new Gson();
+                Restaurant restaurant = restaurants.get(restaurantViewHolder.getAdapterPosition());
+                String json = gson.toJson(restaurant);
+                editor.putString("restaurant", json);
+                editor.commit();
+                //call activity to display details
+                Intent i = new Intent(v.getContext(), ActivityRestaurantProfile.class);
+                v.getContext().startActivity(i);
+            }
+        });
 
     }
 
