@@ -88,8 +88,7 @@ public class ShowOfferDetails extends AppCompatActivity {
             reservations = gson.fromJson(json, new TypeToken<List<Reservation>>() {
             }.getType());
         else
-            myReservation = new Reservation();
-        
+            reservations = new ArrayList<>();
         showDialogOnButtonClick();
 
     }
@@ -184,7 +183,7 @@ public class ShowOfferDetails extends AppCompatActivity {
             xday = dayOfMonth;
 
 
-
+            myReservation = new Reservation();
 
             myReservation.setDate(Integer.toString(xday) + "-" + Integer.toString(xmonth) +"-" + Integer.toString(xyear));
             myReservation.setDailyOffer(dailyOffer);
