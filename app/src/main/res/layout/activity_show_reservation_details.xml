@@ -23,15 +23,18 @@
         <ImageView
             android:layout_width="200dp"
             android:layout_height="200dp"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
             android:id="@+id/reservation_details_image"
             android:layout_gravity="center_horizontal"
             android:src="@mipmap/ic_launcher"
             android:layout_below="@id/toolbar_reservation_details"
             android:layout_centerInParent="true" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:id="@+id/reservation_details_offer_name"
             android:hint="@string/hint_offer_name"
             android:textColorHint="@color/colorPrimaryDark"
@@ -45,7 +48,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:id="@+id/reservation_details_price"
             android:hint="@string/hint_price"
             android:textColorHint="@color/colorPrimaryDark"
@@ -61,6 +65,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:id="@+id/reservation_details_date"
             android:text="@string/reservation_details_date"
             android:textSize="22sp"
@@ -73,6 +78,7 @@
             android:layout_below="@id/reservation_details_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:hint="@string/hint_reservation_details_date"
             android:textColorHint="@color/colorPrimaryDark"
@@ -84,8 +90,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/reservation_details_date_time"
             android:layout_marginTop="20dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_below="@id/reservation_details_date_time"
             android:id="@+id/reservation_details_introduction_customer"
             android:text="@string/introduction_customer"
             android:textSize="22sp"
@@ -95,6 +102,7 @@
             android:layout_below="@id/reservation_details_introduction_customer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:hint="@string/customer_name"
             android:textColorHint="@color/colorPrimaryDark"
@@ -108,6 +116,8 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:text="@string/restaurant_details"
@@ -122,6 +132,8 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:text="@string/offer_description_button"

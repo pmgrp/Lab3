@@ -23,18 +23,19 @@
         <ImageView
             android:layout_width="200dp"
             android:layout_height="200dp"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
             android:id="@+id/offer_details_image"
             android:layout_gravity="center_horizontal"
             android:src="@mipmap/ic_launcher"
             android:layout_below="@id/toolbar_offer_details"
-            android:layout_centerInParent="true"
-            />
+            android:layout_centerInParent="true"/>
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="20dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="20dp"
             android:id="@+id/offer_details_offer_name"
             android:hint="@string/hint_offer_name"
             android:textColorHint="@color/colorPrimaryDark"
@@ -48,7 +49,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="20dp"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="20dp"
             android:id="@+id/offer_details_price"
             android:hint="@string/hint_price"
             android:textColorHint="@color/colorPrimaryDark"
@@ -64,6 +66,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:id="@+id/offer_description"
             android:text="@string/description_offer"
             android:textSize="22sp"
@@ -73,7 +76,9 @@
         <TextView
             android:layout_below="@id/offer_description"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/total_description"
             android:textSize="18sp"
@@ -88,6 +93,8 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:text="@string/restaurant_details"
@@ -102,6 +109,8 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
             android:text="@string/buy_button"
             android:textAlignment="center"
             android:textStyle="bold"
