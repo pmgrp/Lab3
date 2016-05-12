@@ -20,6 +20,16 @@
     <string name="customer_phone_number">Phone number of the customer</string>
     <string name="buy_button">Buy</string>
     <string name="disconnect_button">Disconnect</string>
+    <string name="hint_customer_surname">Write your surname</string>
+    <string name="hint_customer_name">Write your name</string>
+    <string name="hint_customer_email">Write your email address</string>
+    <string name="hint_customer_phone_number">Write your phone number</string>
+    <string name="hint_customer_password">Write your password</string>
+    <string name="button_modify_password">Modify</string>
+    <string name="button_save">Save</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="stars_customer_password">********</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

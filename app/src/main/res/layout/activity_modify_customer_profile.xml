@@ -21,10 +21,10 @@
         </android.support.v7.widget.Toolbar>
 
         <ImageView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_marginTop="@dimen/activity_horizontal_margin"
-            android:id="@+id/customer_profile_photo"
+            android:id="@+id/modify_customer_profile_photo"
             android:layout_gravity="center_horizontal"
             android:src="@mipmap/ic_launcher"
             android:layout_below="@id/toolbar_offer_details"
@@ -37,18 +37,17 @@
             android:layout_marginTop="10dp"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:id="@+id/surname_icon"
-            android:layout_below="@id/customer_profile_photo"
+            android:layout_below="@id/modify_customer_profile_photo"
             android:src="@mipmap/profile_icon"/>
 
-        <TextView
+        <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@id/surname_icon"
-            android:layout_below="@id/customer_profile_photo"
-            android:id="@+id/customer_profile_surname"
-            android:text="@string/customer_surname"
+            android:layout_below="@id/modify_customer_profile_photo"
+            android:id="@+id/modify_customer_profile_surname"
+            android:hint="@string/hint_customer_surname"
             android:textSize="22sp"
             android:textStyle="bold"
             android:textColor="@color/colorPrimaryDark"/>
@@ -64,15 +63,14 @@
             android:layout_below="@id/surname_icon"
             android:src="@mipmap/profile_icon"/>
 
-        <TextView
+        <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@id/surname_icon"
-            android:layout_below="@id/customer_profile_surname"
-            android:id="@+id/customer_profile_name"
-            android:text="@string/customer_name"
+            android:layout_below="@id/modify_customer_profile_surname"
+            android:id="@+id/modify_customer_profile_name"
+            android:hint="@string/hint_customer_name"
             android:textSize="22sp"
             android:textStyle="bold"
             android:textColor="@color/colorPrimaryDark"/>
@@ -88,15 +86,14 @@
             android:src="@mipmap/email_icon"/>
 
 
-        <TextView
+        <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@id/email_icon"
-            android:layout_below="@+id/customer_profile_name"
-            android:id="@+id/customer_profile_email"
-            android:text="@string/customer_email"
+            android:layout_below="@id/modify_customer_profile_name"
+            android:id="@+id/modify_customer_profile_email"
+            android:hint="@string/hint_customer_email"
             android:textSize="22sp"
             android:textStyle="bold"
             android:textColor="@color/colorPrimaryDark"/>
@@ -113,33 +110,74 @@
 
 
 
-        <TextView
+        <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="5dp"
             android:layout_marginLeft="10dp"
-            android:layout_below="@+id/customer_profile_email"
+            android:layout_below="@id/modify_customer_profile_email"
             android:layout_toRightOf="@id/email_icon"
-            android:id="@+id/customer_profile_phone"
-            android:text="@string/customer_phone_number"
+            android:id="@+id/modify_customer_profile_phone"
+            android:hint="@string/hint_customer_phone_number"
             android:textSize="22sp"
             android:textStyle="bold"
             android:textColor="@color/colorPrimaryDark"/>
+
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:id="@+id/password_icon"
+            android:layout_below="@id/phone_icon"
+            android:src="@mipmap/password_icon"/>
+
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_below="@id/modify_customer_profile_phone"
+            android:layout_toRightOf="@id/email_icon"
+            android:id="@+id/modify_customer_profile_password"
+            android:hint="@string/stars_customer_password"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimaryDark"/>
+
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/activity_horizontal_margin"
-            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="50dp"
             android:layout_alignParentBottom="true"
-            android:layout_centerInParent="true"
+            android:layout_alignParentLeft="true"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:text="@string/disconnect_button"
+            android:text="@string/button_cancel"
             android:textAlignment="center"
             android:textStyle="bold"
             android:textColor="@color/button_text_color"
             android:background="#009dff"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="@string/button_save"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:textColor="@color/button_text_color"
+            android:background="#009dff"
+            android:onClick="saveData"/>
 
 
     </RelativeLayout>

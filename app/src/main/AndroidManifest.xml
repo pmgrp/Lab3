@@ -11,7 +11,6 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".ActivityMain"
             android:label="@string/app_name"
@@ -22,7 +21,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ShowOfferDetails"
             android:label="@string/title_show_offer_details"
@@ -33,7 +31,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.sorbellini.s214631.lab3.ActivityMain" />
         </activity>
-
         <activity
             android:name=".ShowReservationDetails"
             android:label="@string/title_show_reservation_details"
@@ -44,7 +41,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.sorbellini.s214631.lab3.ActivityMain" />
         </activity>
-
         <activity
             android:name=".ActivityRestaurantProfile"
             android:label="Restaurant Profile"
@@ -55,8 +51,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.sorbellini.s214631.lab3.ActivityMain" />
         </activity>
-
-        <activity android:name=".CustomerProfile"
+        <activity
+            android:name=".CustomerProfile"
             android:label="Your Profile"
             android:parentActivityName=".ActivityMain"
             android:screenOrientation="portrait"
@@ -65,7 +61,17 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.sorbellini.s214631.lab3.ActivityMain" />
         </activity>
+        <activity
+            android:name=".ModifyCustomerProfile"
+            android:label="Modify Your Profile"
+            android:parentActivityName=".CustomerProfile"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Base">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.sorbellini.s214631.lab3.CustomerProfile" />
 
+        </activity>
     </application>
 
 </manifest>
