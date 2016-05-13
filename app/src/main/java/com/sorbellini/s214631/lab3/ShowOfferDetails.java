@@ -130,15 +130,16 @@ public class ShowOfferDetails extends AppCompatActivity
 
     }
 
-    public void showDateTimePicker(View v){
+    public void goToRestaurantDescription(View view) {
+        startActivity(new Intent(this, ActivityRestaurantProfile.class));
+    }
+
+    public void showDateTimePicker(View v) {
         DialogFragment newFragment = new FragmentTimePicker();
         newFragment.show(getSupportFragmentManager(), "timePicker");
         newFragment = new FragmentDatePicker();
         newFragment.show(getSupportFragmentManager(), "datePicker");
         //Log.d("HOUR", Integer.toString(xhour));
-
-    public void goToRestaurantDescription(View view) {
-        startActivity(new Intent(this, ActivityRestaurantProfile.class));
     }
 
     public void onTimeFragmentOkListener(){
