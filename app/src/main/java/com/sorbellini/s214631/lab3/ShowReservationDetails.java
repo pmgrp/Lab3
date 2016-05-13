@@ -48,9 +48,9 @@ public class ShowReservationDetails extends AppCompatActivity {
             textView = (TextView) findViewById(R.id.reservation_details_price);
             textView.setText(String.format(Locale.getDefault(), "%d", dailyOffer.getPrice()) + " €");
             textView = (TextView) findViewById(R.id.reservation_details_date_time);
-            textView.setText(reservation.getTime());
+            textView.setText(reservation.getDate() + " " + reservation.getTime());
             textView = (TextView) findViewById(R.id.reservation_details_customer_name);
-            textView.setText(customer.getSurname());
+            textView.setText(customer.getName() + " " + customer.getSurname());
 
             Button button = (Button) findViewById(R.id.restaurant_details_button_restaurant);
             button.setText(dailyOffer.getRestaurantName());
