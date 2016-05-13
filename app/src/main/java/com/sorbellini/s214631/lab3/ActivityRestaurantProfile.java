@@ -6,12 +6,12 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-
-import java.util.Locale;
 
 public class ActivityRestaurantProfile extends AppCompatActivity {
 
@@ -30,7 +30,7 @@ public class ActivityRestaurantProfile extends AppCompatActivity {
         Gson gson = new Gson();
 
         String json = preferences.getString("restaurant", null);
-        if(json != null) {
+        if (json != null) {
             restaurant = gson.fromJson(json, Restaurant.class);
 
             imageView = (ImageView) findViewById(R.id.restaurant_profile_image);
@@ -53,11 +53,30 @@ public class ActivityRestaurantProfile extends AppCompatActivity {
 
             textView = (TextView) findViewById(R.id.restaurant_profile_restaurant_iva);
             textView.setText(restaurant.getRestaurantPiva());
-
         }
+
+        final Button likeButton = (Button) findViewById(R.id.likeButton);
+        final TextView likeStatText = (TextView) findViewById(R.id.likeStatText);
+
+        final String textBeforeLike = likeStatText.getText().toString();
+
+
+        likeButton.setTag(1);
+        likeButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                final int status = (Integer) v.getTag();
+                if (status == 1) {
+                    likeStatText.setText("You now like this restaurant");
+                    likeButton.setText("Unlike this Restaurant");
+                    v.setTag(0); //unlike
+                } else {
+                    likeButton.setText("Like this Restaurant");
+                    likeStatText.setText(textBeforeLike);
+                    v.setTag(1); //like
+                }
+            }
+        });
     }
-
-
-
-
 }
