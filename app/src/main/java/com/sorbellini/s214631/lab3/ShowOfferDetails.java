@@ -142,8 +142,8 @@ public class ShowOfferDetails extends AppCompatActivity {
 
         myReservation.setTime(Integer.toString(xhour) + ":" + Integer.toString(xminute));
         Customer dummyCustomer = new Customer();
-        dummyCustomer.setName("Donald");
-        dummyCustomer.setSurname("Trump");
+        dummyCustomer.setName("The Big Don");
+        dummyCustomer.setSurname("Donald Trump");
         dummyCustomer.setPhone("19247934");
         myReservation.setCustomer(dummyCustomer);
 
