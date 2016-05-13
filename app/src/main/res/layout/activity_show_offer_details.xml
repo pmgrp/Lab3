@@ -28,6 +28,7 @@
             android:layout_gravity="center_horizontal"
             android:src="@mipmap/ic_launcher"
             android:layout_below="@id/toolbar_offer_details"
+            android:scaleType="centerCrop"
             android:layout_centerInParent="true"/>
 
 
