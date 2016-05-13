@@ -179,7 +179,7 @@
             android:layout_below="@id/restaurantTextInfoLayout">
 
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="125dp"
                 android:layout_height="wrap_content"
                 android:text="Like this Restaurant"
                 android:id="@+id/likeButton" />
