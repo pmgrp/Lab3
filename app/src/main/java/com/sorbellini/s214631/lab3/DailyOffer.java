@@ -19,6 +19,7 @@ public class DailyOffer {
     //default constructor
     public DailyOffer() {
         this.ID = null;
+
         this.restaurantID = null;
         this.restaurantName = null;
         this.restaurantLatitude = 0;
@@ -32,9 +33,12 @@ public class DailyOffer {
     }
 
     //getter
+
+
     public String getID(){
         return this.ID;
     }
+
     public String getRestaurantID(){
         return this.restaurantID;
     }
@@ -47,6 +51,7 @@ public class DailyOffer {
     public double getRestaurantLongitude(){
         return this.restaurantLongitude;
     }
+
 
     public String getName(){
         return this.name;
@@ -65,10 +70,14 @@ public class DailyOffer {
     }
 
     //setter
+
     public void setID(String ID){this.ID = ID;}
+
+
     public void setRestaurantID(String restaurantID){
         this.restaurantID = restaurantID;
     }
+
     public void setRestaurantName(String restaurantName){
         this.restaurantName = restaurantName;
     }

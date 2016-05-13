@@ -104,6 +104,8 @@ public class DataGen {
         return offers;
     }
 
+
+
     public static ArrayList<Reservation> makeReservations(){
 
         Customer cus1 = new Customer();
@@ -145,6 +147,7 @@ public class DataGen {
         Restaurant res1 = new Restaurant();
         Uri uri = Uri.parse("android.resource://com.sorbellini.s214631.lab3/drawable/restaurant_rome");
         String imagePath = uri.toString();
+        res1.setID(1);
         res1.setRestaurantPhoto(imagePath);
         res1.setRestaurantName("Da Gennaro");
         res1.setRestaurantPhone("06887654");
@@ -158,6 +161,7 @@ public class DataGen {
         Restaurant res2 = new Restaurant();
         uri = Uri.parse("android.resource://com.sorbellini.s214631.lab3/drawable/restaurant_paris");
         imagePath = uri.toString();
+        res2.setID(2);
         res2.setRestaurantPhoto(imagePath);
         res2.setRestaurantName("Chez Léo");
         res2.setRestaurantPhone("0165784325");
@@ -171,6 +175,7 @@ public class DataGen {
         Restaurant res3 = new Restaurant();
         uri = Uri.parse("android.resource://com.sorbellini.s214631.lab3/drawable/restaurant_tokyo");
         imagePath = uri.toString();
+        res3.setID(3);
         res3.setRestaurantPhoto(imagePath);
         res3.setRestaurantName("Keio Sushi");
         res3.setRestaurantPhone("0332013331");

@@ -1,6 +1,7 @@
 package com.sorbellini.s214631.lab3;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.SharedPreferences;
@@ -21,6 +22,9 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -34,13 +38,22 @@ import java.util.Locale;
 public class ShowOfferDetails extends AppCompatActivity
         implements FragmentTimePicker.FragmentListener{
 
-
+    private String ID;
+    private Customer customer;
     private DailyOffer dailyOffer;
+    private ArrayList<Restaurant> restaurants;
+    private String restaurantID;
+    private Restaurant restaurant;
+    private String time;
+    private int status;
+    private Calendar myCalendar;
+    static final int DIALOG_ID = 0;
     int xyear = -1;
     int xmonth = -1;
     int xday = -1;
     int xhour = -1;
     int xminute = -1;
+
     Reservation myReservation;
     ArrayList<Reservation> reservations;
 
@@ -68,8 +81,24 @@ public class ShowOfferDetails extends AppCompatActivity
 
 
         String json = preferences.getString("offer", null);
-        if(json != null) {
+
+        if (json != null) {
             dailyOffer = gson.fromJson(json, DailyOffer.class);
+            restaurants = DataGen.makeRestaurants();
+            restaurantID = dailyOffer.getRestaurantID();
+            for (Restaurant r : restaurants)
+            {
+                if (r.getID().contentEquals(restaurantID)) {
+                    restaurant = r;
+                }
+            }
+
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+            SharedPreferences.Editor editor = prefs.edit();
+            json = gson.toJson(restaurant);
+            editor.putString("restaurant", json);
+            editor.commit();
+
 
             ImageView imageView = (ImageView) findViewById(R.id.offer_details_image);
             imageView.setImageURI(Uri.parse(dailyOffer.getPhoto()));
@@ -85,7 +114,7 @@ public class ShowOfferDetails extends AppCompatActivity
 
 
             Button button = (Button) findViewById(R.id.offer_details_button_restaurant);
-            button.setText(dailyOffer.getRestaurantName());
+            button.setText(restaurant.getRestaurantName());
         }
 
 
@@ -108,7 +137,8 @@ public class ShowOfferDetails extends AppCompatActivity
         newFragment.show(getSupportFragmentManager(), "datePicker");
         //Log.d("HOUR", Integer.toString(xhour));
 
-
+    public void goToRestaurantDescription(View view) {
+        startActivity(new Intent(this, ActivityRestaurantProfile.class));
     }
 
     public void onTimeFragmentOkListener(){

@@ -105,7 +105,8 @@
             android:id="@+id/offer_details_button_restaurant"
             android:background="#009dff"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentBottom="true"/>
+            android:layout_alignParentBottom="true"
+            android:onClick="goToRestaurantDescription"/>
 
         <Button
             android:layout_width="wrap_content"

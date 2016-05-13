@@ -13,6 +13,7 @@ public class Reservation {
     //private String restaurantID;
     private Customer customer;
     private DailyOffer dailyOffer;
+    private Restaurant restaurant;
     private String date;
     private String time;
     private String comment; //@TODO implement comment feature
@@ -27,6 +28,7 @@ public class Reservation {
         this.comment = null;
         this.status = ARRIVED;
         this.date = null;
+        this.restaurant = null;
     }
 
 
@@ -41,6 +43,7 @@ public class Reservation {
         this.time = time;
         this.comment = null;
         this.status = ARRIVED;
+        this.restaurant = null;
     }
 
     //getter
@@ -52,6 +55,7 @@ public class Reservation {
     public String getComment(){ return this.comment; }
     public int getStatus(){ return this.status; }
     public DailyOffer getDailyOffer(){ return dailyOffer; }
+    public Restaurant getRestaurant() { return restaurant; }
 
     //setter
     public void setCustomer(Customer customer){
@@ -72,5 +76,7 @@ public class Reservation {
     public void setStatus(int status){ this.status = status; }
 
     public void setDailyOffer(DailyOffer dailyOffer){ this.dailyOffer = dailyOffer; }
+
+    public void setRestaurant(Restaurant restaurant) { this.restaurant = restaurant; }
 
 }

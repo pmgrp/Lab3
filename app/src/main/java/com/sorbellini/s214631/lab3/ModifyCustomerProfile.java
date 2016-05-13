@@ -31,30 +31,35 @@ public class ModifyCustomerProfile extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        /*
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         Gson gson = new Gson();
 
         String json = preferences.getString("profile", null);
         if(json != null) {
-            profile = gson.fromJson(json, Profile.class);
-
-            ImageView imageView = (ImageView) findViewById(R.id.modify_customer_profile_photo);
-            imageView.setImageURI(Uri.parse(profile.getPhoto()));
-
-            TextView textView = (TextView) findViewById(R.id.modify_customer_profile_surname);
-            textView.setText(profile.getSurname());
-            textView = (TextView) findViewById(R.id.modify_customer_profile_name);
-            textView.setText(profile.getName());
-            textView = (TextView) findViewById(R.id.modify_customer_profile_email);
-            textView.setText(profile.getEmail());
-            textView = (TextView) findViewById(R.id.modify_customer_profile_phone);
-            textView.setText(profile.getPhone());
-            textView = (TextView) findViewById(R.id.modify_customer_profile_password);
-            textView.setText(profile.getPassword());
-
+            profile = gson.fromJson(json, Customer.class);
         }
-        */
+        else {
+            profile = new Customer();
+            profile.setSurname("Dupont");
+            profile.setName("Henry");
+            profile.setEmail("henry_dupont@email.it");
+            profile.setPhone("392 456 5874");
+            profile.setPassword("*****");
+        }
+
+        ImageView imageView = (ImageView) findViewById(R.id.customer_profile_photo);
+        //imageView.setImageURI(Uri.parse(profile.getPhoto()));
+
+        TextView textView = (TextView) findViewById(R.id.customer_profile_surname);
+        textView.setText(profile.getSurname());
+        textView = (TextView) findViewById(R.id.customer_profile_name);
+        textView.setText(profile.getName());
+        textView = (TextView) findViewById(R.id.customer_profile_email);
+        textView.setText(profile.getEmail());
+        textView = (TextView) findViewById(R.id.customer_profile_phone);
+        textView.setText(profile.getPhone());
+
+
     }
 
 
