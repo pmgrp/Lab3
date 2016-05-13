@@ -11,7 +11,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.reflect.TypeToken;
 
+import java.util.List;
 import java.util.Locale;
 
 public class CustomerProfile extends AppCompatActivity {
@@ -27,16 +31,24 @@ public class CustomerProfile extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        /*
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         Gson gson = new Gson();
 
         String json = preferences.getString("profile", null);
         if(json != null) {
-            profile = gson.fromJson(json, Profile.class);
+            profile = gson.fromJson(json, Customer.class);
+        }
+        else {
+            profile = new Customer();
+            profile.setSurname("Dupont");
+            profile.setName("Henry");
+            profile.setEmail("henry_dupont@email.it");
+            profile.setPhone("392 456 5874");
+            profile.setPassword("*****");
+        }
 
             ImageView imageView = (ImageView) findViewById(R.id.customer_profile_photo);
-            imageView.setImageURI(Uri.parse(profile.getPhoto()));
+            //imageView.setImageURI(Uri.parse(profile.getPhoto()));
 
             TextView textView = (TextView) findViewById(R.id.customer_profile_surname);
             textView.setText(profile.getSurname());
@@ -47,7 +59,21 @@ public class CustomerProfile extends AppCompatActivity {
             textView = (TextView) findViewById(R.id.customer_profile_phone);
             textView.setText(profile.getPhone());
 
-        }
-        */
+
+
     }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = prefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(profile);
+        editor.putString("profile", json);
+        editor.commit();
+    }
+
 }
+
+

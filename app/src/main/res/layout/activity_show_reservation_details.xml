@@ -126,6 +126,7 @@
             android:textColor="@color/button_text_color"
             android:id="@+id/restaurant_details_button_restaurant"
             android:background="#009dff"
+            android:onClick="goToRestaurantDescription"
             android:layout_alignParentLeft="true"
             android:layout_alignParentBottom="true"/>
 

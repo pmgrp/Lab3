@@ -98,7 +98,7 @@ public class FragmentShowOffers extends Fragment {
             //compute distance in meters in distance[0]
             for (int i = 0; i < offers.size(); i++) {
                 Location.distanceBetween(mLastLocation.getLatitude(), mLastLocation.getLongitude(),
-                        offers.get(i).getRestaurantLatitude(), offers.get(i).getRestaurantLongitude(), offers.get(i).distance);
+                        offers.get(i).getRestaurant().getLatitude(), offers.get(i).getRestaurant().getLongitude(), offers.get(i).distance);
             }
         }
 

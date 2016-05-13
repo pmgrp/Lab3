@@ -1,6 +1,7 @@
 package com.sorbellini.s214631.lab3;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.SharedPreferences;
@@ -20,6 +21,9 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -35,14 +39,20 @@ public class ShowOfferDetails extends AppCompatActivity {
     private String ID;
     private Customer customer;
     private DailyOffer dailyOffer;
+    private Restaurant restaurant;
     private String time;
     private int status;
     private Calendar myCalendar;
     static final int DIALOG_ID = 0;
-    int xyear,xmonth,xday;
-    int xhour,xminute;
+    int xyear, xmonth, xday;
+    int xhour, xminute;
     Reservation myReservation;
     ArrayList<Reservation> reservations = new ArrayList<>();
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
 
     @Override
@@ -66,8 +76,9 @@ public class ShowOfferDetails extends AppCompatActivity {
 
 
         String json = preferences.getString("offer", null);
-        if(json != null) {
+        if (json != null) {
             dailyOffer = gson.fromJson(json, DailyOffer.class);
+            restaurant = dailyOffer.getRestaurant();
 
             ImageView imageView = (ImageView) findViewById(R.id.offer_details_image);
             imageView.setImageURI(Uri.parse(dailyOffer.getPhoto()));
@@ -80,34 +91,35 @@ public class ShowOfferDetails extends AppCompatActivity {
             textView.setText(dailyOffer.getDescription());
 
             Button button = (Button) findViewById(R.id.offer_details_button_restaurant);
-            button.setText(dailyOffer.getRestaurantName());
+            button.setText(restaurant.getRestaurantName());
         }
 
         json = preferences.getString("reservations", null);
-        if(json != null)
+        if (json != null)
             reservations = gson.fromJson(json, new TypeToken<List<Reservation>>() {
             }.getType());
         else
             reservations = new ArrayList<>();
         showDialogOnButtonClick();
 
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
 
-    /*
     public void goToRestaurantDescription(View view) {
-
+        startActivity(new Intent(this, ActivityRestaurantProfile.class));
     }
-    */
 
 
     public void showDialogOnButtonClick() {
         Button buy = (Button) findViewById(R.id.button_buy);
 
         buy.setOnClickListener(
-                new View.OnClickListener(){
+                new View.OnClickListener() {
                     @Override
-                    public void onClick(View v){
+                    public void onClick(View v) {
                         showDialog(DIALOG_ID);
                     }
                 }
@@ -153,7 +165,8 @@ public class ShowOfferDetails extends AppCompatActivity {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = preferences.edit();
         Gson gson = new Gson();
-        JsonElement element = gson.toJsonTree(reservations, new TypeToken<List<Reservation>>(){}.getType());
+        JsonElement element = gson.toJsonTree(reservations, new TypeToken<List<Reservation>>() {
+        }.getType());
         JsonArray jsonarray = element.getAsJsonArray();
         editor.putString("reservations", jsonarray.toString());
         editor.commit();
@@ -169,9 +182,8 @@ public class ShowOfferDetails extends AppCompatActivity {
             myDatePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
 
             return myDatePickerDialog;
-           // return new DatePickerDialog(this, dpickerListener, xyear, xmonth, xday);
-        }
-        else
+            // return new DatePickerDialog(this, dpickerListener, xyear, xmonth, xday);
+        } else
             return null;
     }
 
@@ -185,7 +197,7 @@ public class ShowOfferDetails extends AppCompatActivity {
 
             myReservation = new Reservation();
 
-            myReservation.setDate(Integer.toString(xday) + "-" + Integer.toString(xmonth) +"-" + Integer.toString(xyear));
+            myReservation.setDate(Integer.toString(xday) + "-" + Integer.toString(xmonth) + "-" + Integer.toString(xyear));
             myReservation.setDailyOffer(dailyOffer);
             myReservation.setStatus(Reservation.ARRIVED);
             createTimePicker();
@@ -194,8 +206,45 @@ public class ShowOfferDetails extends AppCompatActivity {
     };
 
 
+    @Override
+    public void onStart() {
+        super.onStart();
 
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "ShowOfferDetails Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app URL is correct.
+                Uri.parse("android-app://com.sorbellini.s214631.lab3/http/host/path")
+        );
+        AppIndex.AppIndexApi.start(client, viewAction);
+    }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "ShowOfferDetails Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app URL is correct.
+                Uri.parse("android-app://com.sorbellini.s214631.lab3/http/host/path")
+        );
+        AppIndex.AppIndexApi.end(client, viewAction);
+        client.disconnect();
+    }
 }
 
 

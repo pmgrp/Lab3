@@ -21,6 +21,7 @@ public class ShowReservationDetails extends AppCompatActivity {
     private Reservation reservation;
     private DailyOffer dailyOffer;
     private Customer customer;
+    private Restaurant restaurant;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,8 @@ public class ShowReservationDetails extends AppCompatActivity {
             reservation = gson.fromJson(json, Reservation.class);
             dailyOffer = reservation.getDailyOffer();
             customer = reservation.getCustomer();
+            restaurant = dailyOffer.getRestaurant();
+
 
             ImageView imageView = (ImageView) findViewById(R.id.reservation_details_image);
             imageView.setImageURI(Uri.parse(dailyOffer.getPhoto()));
@@ -53,7 +56,7 @@ public class ShowReservationDetails extends AppCompatActivity {
             textView.setText(customer.getSurname());
 
             Button button = (Button) findViewById(R.id.restaurant_details_button_restaurant);
-            button.setText(dailyOffer.getRestaurantName());
+            button.setText(restaurant.getRestaurantName());
         }
 
 
@@ -68,7 +71,7 @@ public class ShowReservationDetails extends AppCompatActivity {
 
 
     public void goToRestaurantDescription(View view) {
-
+        startActivity(new Intent(this, ActivityRestaurantProfile.class));
     }
 
 
