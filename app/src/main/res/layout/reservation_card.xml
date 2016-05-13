@@ -63,7 +63,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_below="@id/reservation_card_restaurant"
-                    android:text="Time"
+                    android:text="Date and Time"
                     android:textColor="@color/dark_text_color"
                     android:textSize="20sp" />
 

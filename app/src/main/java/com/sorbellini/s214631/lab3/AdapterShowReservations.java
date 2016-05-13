@@ -62,7 +62,7 @@ public class AdapterShowReservations extends RecyclerView.Adapter<AdapterShowRes
 
         reservationViewHolder.offerName.setText(reservations.get(i).getDailyOffer().getName());
         reservationViewHolder.restaurantName.setText(reservations.get(i).getDailyOffer().getRestaurantName());
-        reservationViewHolder.time.setText(reservations.get(i).getTime());
+        reservationViewHolder.time.setText(reservations.get(i).getDate() + " at " + reservations.get(i).getTime());
         int status = reservations.get(i).getStatus();
         switch (status) {
             case Reservation.ARRIVED:
