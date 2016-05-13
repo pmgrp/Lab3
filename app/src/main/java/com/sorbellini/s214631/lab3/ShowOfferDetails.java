@@ -78,11 +78,10 @@ public class ShowOfferDetails extends AppCompatActivity
             textView.setText(dailyOffer.getName());
             textView = (TextView) findViewById(R.id.offer_details_price);
             textView.setText(String.format(Locale.getDefault(), "%d", dailyOffer.getPrice()) + " €");
+
             textView = (TextView) findViewById(R.id.offer_details_description);
             textView.setText(dailyOffer.getDescription());
 
-            textView = (TextView) findViewById(R.id.offer_description);
-            textView.setText(dailyOffer.getDescription());
 
 
             Button button = (Button) findViewById(R.id.offer_details_button_restaurant);
