@@ -129,7 +129,16 @@ public class ShowOfferDetails extends AppCompatActivity
             myReservation = new Reservation();
             myReservation.setCustomer(dummyCustomer);
             myReservation.setDate(Integer.toString(xday) + "-" + Integer.toString(xmonth) +"-" + Integer.toString(xyear));
-            myReservation.setTime(Integer.toString(xhour) + ":" + Integer.toString(xminute));
+
+            String tempMin = Integer.toString(xminute);
+            String tempMin2;
+
+            if(xminute < 10)
+                tempMin2 = "0" + tempMin;
+            else
+                tempMin2 = tempMin;
+
+            myReservation.setTime(Integer.toString(xhour) + ":" + tempMin2);
             myReservation.setDailyOffer(dailyOffer);
             myReservation.setStatus(Reservation.ARRIVED);
 
