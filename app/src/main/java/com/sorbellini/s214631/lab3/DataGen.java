@@ -25,6 +25,7 @@ public class DataGen {
         off1.setRestaurantLatitude(41.90278); //Rome
         off1.setRestaurantLongitude(12.49637);
         off1.setRestaurantName("Da Gennaro");
+        off1.setDescription("The good old world famous Italian Pizza");
 
 
         off2 = new DailyOffer();
@@ -38,6 +39,7 @@ public class DataGen {
         off2.setRestaurantLatitude(48.85661); //Paris
         off2.setRestaurantLongitude(2.35222);
         off2.setRestaurantName("Chez Léo");
+        off2.setDescription("A French favorite and a culinary adventure");
 
 
         off3 = new DailyOffer();
@@ -51,7 +53,7 @@ public class DataGen {
         off3.setRestaurantLatitude(41.90278); //Rome
         off3.setRestaurantLongitude(12.49637);
         off3.setRestaurantName("Da Gennaro");
-
+        off3.setDescription("World famous Italian pasta with the sauce of your choice from Pesto Genovese, Carbonara, Pesto Calabrese and Ragù");
 
         off4 = new DailyOffer();
         uri = Uri.parse("android.resource://com.sorbellini.s214631.lab3/drawable/beef");
@@ -64,6 +66,7 @@ public class DataGen {
         off4.setRestaurantLatitude(48.85661); //Paris
         off4.setRestaurantLongitude(2.35222);
         off4.setRestaurantName("Chez Léo");
+        off4.setDescription("Quality Beef with various cooking options");
 
         off5 = new DailyOffer();
         uri = Uri.parse("android.resource://com.sorbellini.s214631.lab3/drawable/chicken");
@@ -76,6 +79,7 @@ public class DataGen {
         off5.setRestaurantLatitude(35.689487); //Tokio
         off5.setRestaurantLongitude(139.691706);
         off5.setRestaurantName("Keio Sushi");
+        off5.setDescription("Japanese style fried chicken");
 
         off6 = new DailyOffer();
         uri = Uri.parse("android.resource://com.sorbellini.s214631.lab3/drawable/sushi");
@@ -88,6 +92,7 @@ public class DataGen {
         off6.setRestaurantLatitude(35.689487); //Tokio
         off6.setRestaurantLongitude(139.691706);
         off6.setRestaurantName("Keio Sushi");
+        off6.setDescription("World famous Japanese sushi");
 
         ArrayList<DailyOffer> offers = new ArrayList<>();
         offers.add(off1);
@@ -118,7 +123,7 @@ public class DataGen {
         res2.setDailyOffer(off2);
         res2.setStatus(Reservation.ARRIVED);
         res2.setTime("13:30");
-        res2.setComment("I may be in late");
+        res2.setComment("I might be late");
 
         Reservation res3 = new Reservation();
         res3.setCustomer(cus1);
