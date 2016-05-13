@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.annotation.IntegerRes;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -30,19 +31,18 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-public class ShowOfferDetails extends AppCompatActivity {
+public class ShowOfferDetails extends AppCompatActivity
+        implements FragmentTimePicker.FragmentListener{
 
-    private String ID;
-    private Customer customer;
+
     private DailyOffer dailyOffer;
-    private String time;
-    private int status;
-    private Calendar myCalendar;
-    static final int DIALOG_ID = 0;
-    int xyear,xmonth,xday;
-    int xhour,xminute;
+    int xyear = -1;
+    int xmonth = -1;
+    int xday = -1;
+    int xhour = -1;
+    int xminute = -1;
     Reservation myReservation;
-    ArrayList<Reservation> reservations = new ArrayList<>();
+    ArrayList<Reservation> reservations;
 
 
     @Override
@@ -53,13 +53,15 @@ public class ShowOfferDetails extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        final Calendar cal = Calendar.getInstance();
+
+        /*
+        //final Calendar cal = Calendar.getInstance();
         xyear = cal.get(Calendar.YEAR);
         xmonth = cal.get(Calendar.MONTH);
         xday = cal.get(Calendar.DAY_OF_MONTH);
 
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        */
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         Gson gson = new Gson();
@@ -83,115 +85,86 @@ public class ShowOfferDetails extends AppCompatActivity {
             button.setText(dailyOffer.getRestaurantName());
         }
 
+
+        //get reservations if there were already saved
         json = preferences.getString("reservations", null);
-        if(json != null)
+        if(json != null) {
             reservations = gson.fromJson(json, new TypeToken<List<Reservation>>() {
             }.getType());
-        else
-            reservations = new ArrayList<>();
-        showDialogOnButtonClick();
-
-    }
-
-
-    /*
-    public void goToRestaurantDescription(View view) {
-
-    }
-    */
-
-
-    public void showDialogOnButtonClick() {
-        Button buy = (Button) findViewById(R.id.button_buy);
-
-        buy.setOnClickListener(
-                new View.OnClickListener(){
-                    @Override
-                    public void onClick(View v){
-                        showDialog(DIALOG_ID);
-                    }
-                }
-        );
-
-
-    }
-
-    private void createTimePicker() {
-        Calendar mcurrentTime = Calendar.getInstance();
-        int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
-        int minute = mcurrentTime.get(Calendar.MINUTE);
-        TimePickerDialog mTimePicker;
-
-        mTimePicker = new TimePickerDialog(ShowOfferDetails.this, 4, new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            // CLEMENT : si tu veux changer le design de l'horloge il faut que tu changes le nombre au-dessus
-            // De 1 à 3, c'est des spinner et après c'est des horloges
-
-            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                //eReminderTime.setText( selectedHour + ":" + selectedMinute);
-                xhour = selectedHour;
-                xminute = selectedMinute;
-
-            }
-        }, hour, minute, true);//Yes 24 hour time
-        mTimePicker.setTitle("Select Time");
-        mTimePicker.show();
-
-        Log.d("Hour: ", Integer.toString(xhour));
-        Log.d("Minutes: ", Integer.toString(xminute));
-
-        myReservation.setTime(Integer.toString(xhour) + ":" + Integer.toString(xminute));
-        Customer dummyCustomer = new Customer();
-        dummyCustomer.setName("The Big Don");
-        dummyCustomer.setSurname("Donald Trump");
-        dummyCustomer.setPhone("19247934");
-        myReservation.setCustomer(dummyCustomer);
-
-        reservations.add(myReservation);
-
-
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        SharedPreferences.Editor editor = preferences.edit();
-        Gson gson = new Gson();
-        JsonElement element = gson.toJsonTree(reservations, new TypeToken<List<Reservation>>(){}.getType());
-        JsonArray jsonarray = element.getAsJsonArray();
-        editor.putString("reservations", jsonarray.toString());
-        editor.commit();
-
-
-    }
-
-    @Override
-    protected Dialog onCreateDialog(int id) {
-        if (id == DIALOG_ID) {
-
-            DatePickerDialog myDatePickerDialog = new DatePickerDialog(this, dpickerListener, xyear, xmonth, xday);
-            myDatePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
-
-            return myDatePickerDialog;
-           // return new DatePickerDialog(this, dpickerListener, xyear, xmonth, xday);
         }
-        else
-            return null;
+        else {
+            reservations = new ArrayList<>();
+        }
+
     }
 
-    private DatePickerDialog.OnDateSetListener dpickerListener = new DatePickerDialog.OnDateSetListener() {
-        @Override
-        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-            xyear = year;
-            xmonth = monthOfYear + 1; // by default it begins on 0
-            xday = dayOfMonth;
+    public void showDateTimePicker(View v){
+        DialogFragment newFragment = new FragmentTimePicker();
+        newFragment.show(getSupportFragmentManager(), "timePicker");
+        newFragment = new FragmentDatePicker();
+        newFragment.show(getSupportFragmentManager(), "datePicker");
+        //Log.d("HOUR", Integer.toString(xhour));
 
 
+    }
+
+    public void onTimeFragmentOkListener(){
+        Log.d("DAY", Integer.toString(xday));
+        Log.d("MONTH", Integer.toString(xmonth));
+        Log.d("YEAR", Integer.toString(xyear));
+        Log.d("HOUR", Integer.toString(xhour));
+        Log.d("MINUTE", Integer.toString(xminute));
+        if(xhour != -1 && xminute != -1 && xday != -1 && xmonth != -1 && xyear != -1){
+            //create dummy customer
+            Customer dummyCustomer = new Customer();
+            dummyCustomer.setName("Mario");
+            dummyCustomer.setSurname("Rossi");
+            dummyCustomer.setPhone("19247934");
+
+            //create new reservation
             myReservation = new Reservation();
-
+            myReservation.setCustomer(dummyCustomer);
             myReservation.setDate(Integer.toString(xday) + "-" + Integer.toString(xmonth) +"-" + Integer.toString(xyear));
+            myReservation.setTime(Integer.toString(xhour) + ":" + Integer.toString(xminute));
             myReservation.setDailyOffer(dailyOffer);
             myReservation.setStatus(Reservation.ARRIVED);
-            createTimePicker();
-        }
 
-    };
+            //add the reservation
+            reservations.add(myReservation);
+            Toast t = Toast.makeText(this, "Reservation Created", Toast.LENGTH_LONG);
+            t.show();
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+            SharedPreferences.Editor editor = preferences.edit();
+            Gson gson = new Gson();
+            JsonElement element = gson.toJsonTree(reservations, new TypeToken<List<Reservation>>(){}.getType());
+            JsonArray jsonarray = element.getAsJsonArray();
+            editor.putString("reservations", jsonarray.toString());
+            editor.commit();
+
+        }
+        else{
+            Toast t = Toast.makeText(this, "Reservation Not Completed", Toast.LENGTH_SHORT );
+            t.show();
+            xyear = -1;
+            xmonth = -1;
+            xday = -1;
+            xhour = -1;
+            xminute = -1;
+
+        }
+    }
+
+
+    public void setTime(int hour, int minutes){
+        this.xhour = hour;
+        this.xminute = minutes;
+    }
+
+    public void setDate(int xyear, int xmonth, int xday){
+        this.xyear = xyear;
+        this.xmonth = xmonth;
+        this.xday = xday;
+    }
 
 
 
