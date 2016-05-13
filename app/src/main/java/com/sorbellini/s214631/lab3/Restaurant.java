@@ -17,10 +17,13 @@ public class Restaurant {
     private String restaurantWebsite;
     private String restaurantPiva;
     private String restaurantPhoto;
+    private int likeCount;
+
     public ArrayList<Day> openingDays;
     public ArrayList<String> reservations; //those are ArrayLists of strings because they have only the IDs
     public ArrayList<String> dailyOffers; //from which you can retrieve the object from DB
     public ArrayList<String> comments;
+
     float distance[] = {0,0,0};
 
     public Restaurant() {
@@ -38,6 +41,7 @@ public class Restaurant {
         this.reservations = null;
         this.dailyOffers = null;
         this.comments = null;
+        this.likeCount = 0;
     }
 
 
@@ -45,6 +49,8 @@ public class Restaurant {
     public String getID() {
         return ID;
     }
+
+    public int getLikeCount() { return likeCount; }
 
     public double getLatitude() {
         return latitude;
@@ -86,6 +92,11 @@ public class Restaurant {
     //setter
     public void setID(String ID) {
         this.ID = ID;
+    }
+
+    public void setLikeCount(int likes)
+    {
+        this.likeCount = likes;
     }
 
     public void setLatitude(double latitude) {

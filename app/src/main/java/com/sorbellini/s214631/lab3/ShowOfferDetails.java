@@ -160,6 +160,53 @@ public class ShowOfferDetails extends AppCompatActivity
         this.xminute = minutes;
     }
 
+    /*
+
+    private void createTimePicker() {
+        Calendar mcurrentTime = Calendar.getInstance();
+        int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+        int minute = mcurrentTime.get(Calendar.MINUTE);
+        TimePickerDialog mTimePicker;
+
+        mTimePicker = new TimePickerDialog(ShowOfferDetails.this, 4, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            // CLEMENT : si tu veux changer le design de l'horloge il faut que tu changes le nombre au-dessus
+            // De 1 à 3, c'est des spinner et après c'est des horloges
+
+            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                //eReminderTime.setText( selectedHour + ":" + selectedMinute);
+                xhour = selectedHour;
+                xminute = selectedMinute;
+
+            }
+        }, hour, minute, true);//Yes 24 hour time
+        mTimePicker.setTitle("Select Time");
+        mTimePicker.show();
+
+        Log.d("Hour: ", Integer.toString(xhour));
+        Log.d("Minutes: ", Integer.toString(xminute));
+
+        myReservation.setTime(Integer.toString(xhour) + ":" + Integer.toString(xminute));
+        Customer dummyCustomer = new Customer();
+        dummyCustomer.setName("The Big Don");
+        dummyCustomer.setSurname("Donald Trump");
+        dummyCustomer.setPhone("19247934");
+        myReservation.setCustomer(dummyCustomer);
+
+        reservations.add(myReservation);
+
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = preferences.edit();
+        Gson gson = new Gson();
+        JsonElement element = gson.toJsonTree(reservations, new TypeToken<List<Reservation>>(){}.getType());
+        JsonArray jsonarray = element.getAsJsonArray();
+        editor.putString("reservations", jsonarray.toString());
+        editor.commit();
+    }
+
+    */
+
     public void setDate(int xyear, int xmonth, int xday){
         this.xyear = xyear;
         this.xmonth = xmonth;

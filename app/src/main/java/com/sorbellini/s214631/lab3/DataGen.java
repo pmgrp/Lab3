@@ -26,6 +26,7 @@ public class DataGen {
         off1.setRestaurantLongitude(12.49637);
         off1.setRestaurantName("Da Gennaro");
 
+
         off2 = new DailyOffer();
         uri = Uri.parse("android.resource://com.sorbellini.s214631.lab3/drawable/escargot");
         imagePath = uri.toString();
@@ -38,6 +39,7 @@ public class DataGen {
         off2.setRestaurantLongitude(2.35222);
         off2.setRestaurantName("Chez Léo");
 
+
         off3 = new DailyOffer();
         uri = Uri.parse("android.resource://com.sorbellini.s214631.lab3/drawable/pasta");
         imagePath = uri.toString();
@@ -49,6 +51,7 @@ public class DataGen {
         off3.setRestaurantLatitude(41.90278); //Rome
         off3.setRestaurantLongitude(12.49637);
         off3.setRestaurantName("Da Gennaro");
+
 
         off4 = new DailyOffer();
         uri = Uri.parse("android.resource://com.sorbellini.s214631.lab3/drawable/beef");
@@ -143,6 +146,9 @@ public class DataGen {
         res1.setRestaurantAddress("Piazza Della Repubblica 1, Roma");
         res1.setLatitude(41.90278); //Rome
         res1.setLongitude(12.49637);
+        res1.setRestaurantEmail("contact@dagennaro.it");
+        res1.setLikeCount(2453);
+        res1.setRestaurantPiva("1234567865");
 
         Restaurant res2 = new Restaurant();
         uri = Uri.parse("android.resource://com.sorbellini.s214631.lab3/drawable/restaurant_paris");
@@ -153,6 +159,9 @@ public class DataGen {
         res2.setRestaurantAddress("Rue de Rivoli 25, Paris");
         res2.setLatitude(48.85661); //Paris
         res2.setLongitude(2.35222);
+        res2.setRestaurantEmail("info@chezleo.fr");
+        res2.setLikeCount(5567);
+
 
         Restaurant res3 = new Restaurant();
         uri = Uri.parse("android.resource://com.sorbellini.s214631.lab3/drawable/restaurant_tokyo");
@@ -163,6 +172,9 @@ public class DataGen {
         res3.setRestaurantAddress("Keio Plaza 4, Tokyo");
         res3.setLatitude(35.689487); //Tokyo
         res3.setLongitude(139.691706);
+        res3.setRestaurantEmail("keio@keiosushi.jp");
+        res3.setLikeCount(7538);
+
 
         ArrayList<Restaurant> restaurants = new ArrayList<>();
         restaurants.add(res1);
