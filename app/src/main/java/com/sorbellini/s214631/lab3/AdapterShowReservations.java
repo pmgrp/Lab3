@@ -61,7 +61,7 @@ public class AdapterShowReservations extends RecyclerView.Adapter<AdapterShowRes
     public void onBindViewHolder(final ReservationViewHolder reservationViewHolder, int i) {
 
         reservationViewHolder.offerName.setText(reservations.get(i).getDailyOffer().getName());
-        reservationViewHolder.restaurantName.setText(reservations.get(i).getDailyOffer().getRestaurant().getRestaurantName());
+        reservationViewHolder.restaurantName.setText(reservations.get(i).getDailyOffer().getRestaurantName());
         reservationViewHolder.time.setText(reservations.get(i).getTime());
         int status = reservations.get(i).getStatus();
         switch (status) {

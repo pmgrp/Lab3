@@ -65,7 +65,7 @@ public class AdapterShowOffers extends RecyclerView.Adapter<AdapterShowOffers.Of
     public void onBindViewHolder(final OfferViewHolder offerViewHolder, int i) {
 
         offerViewHolder.offerImage.setImageURI(Uri.parse(offers.get(i).getPhoto()));
-        offerViewHolder.offerRestaurantName.setText(offers.get(i).getRestaurant().getRestaurantName());
+        offerViewHolder.offerRestaurantName.setText(offers.get(i).getRestaurantName());
         offerViewHolder.offerName.setText(offers.get(i).getName());
         offerViewHolder.offerPrice.setText(String.format(Locale.getDefault(),"%d", offers.get(i).getPrice()));
         float km = offers.get(i).distance[0]/1000;

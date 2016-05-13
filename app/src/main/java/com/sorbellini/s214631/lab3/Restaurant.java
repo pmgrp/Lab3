@@ -19,12 +19,12 @@ public class Restaurant {
     private String restaurantPhoto;
     public ArrayList<Day> openingDays;
     public ArrayList<String> reservations; //those are ArrayLists of strings because they have only the IDs
-    public ArrayList<String> dailyOffers; //from which you can retrieve the object from DB
+    //public ArrayList<String> dailyOffers; //from which you can retrieve the object from DB
     public ArrayList<String> comments;
     float distance[] = {0,0,0};
 
     public Restaurant() {
-        this.ID = null;
+        this.ID = "";
         this.latitude = 0;
         this.longitude = 0;
         this.restaurantName = "";
@@ -36,7 +36,7 @@ public class Restaurant {
         this.restaurantPhoto = "";
         this.openingDays = null;
         this.reservations = null;
-        this.dailyOffers = null;
+        //this.dailyOffers = null;
         this.comments = null;
     }
 

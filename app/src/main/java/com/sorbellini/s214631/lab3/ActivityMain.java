@@ -223,6 +223,7 @@ public class ActivityMain extends AppCompatActivity implements
     public void displayView(int position) {
         Fragment fragment = null;
         switch (position) {
+
             case 0:
                 //mDrawerLayout.closeDrawer(mDrawerList);
                 spinner.setVisibility(View.VISIBLE);
@@ -245,6 +246,7 @@ public class ActivityMain extends AppCompatActivity implements
                         .replace(R.id.frame_container, fragment, "RESTAURANTS").commit();
                 current_fragment = 2;
                 break;
+
             case 2:
                 spinner.setVisibility(View.GONE);
                 mDrawerList.setSelection(2);

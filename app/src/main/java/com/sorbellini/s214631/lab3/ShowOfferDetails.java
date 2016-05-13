@@ -39,6 +39,8 @@ public class ShowOfferDetails extends AppCompatActivity {
     private String ID;
     private Customer customer;
     private DailyOffer dailyOffer;
+    private ArrayList<Restaurant> restaurants;
+    private String restaurantID;
     private Restaurant restaurant;
     private String time;
     private int status;
@@ -76,9 +78,24 @@ public class ShowOfferDetails extends AppCompatActivity {
 
 
         String json = preferences.getString("offer", null);
+
         if (json != null) {
             dailyOffer = gson.fromJson(json, DailyOffer.class);
-            restaurant = dailyOffer.getRestaurant();
+            restaurants = DataGen.makeRestaurants();
+            restaurantID = dailyOffer.getRestaurantID();
+            for (Restaurant r : restaurants)
+            {
+                if (r.getID().contentEquals(restaurantID)) {
+                    restaurant = r;
+                }
+            }
+
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+            SharedPreferences.Editor editor = prefs.edit();
+            json = gson.toJson(restaurant);
+            editor.putString("restaurant", json);
+            editor.commit();
+
 
             ImageView imageView = (ImageView) findViewById(R.id.offer_details_image);
             imageView.setImageURI(Uri.parse(dailyOffer.getPhoto()));

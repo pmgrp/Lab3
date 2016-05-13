@@ -14,14 +14,19 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 public class ShowReservationDetails extends AppCompatActivity {
 
     private Reservation reservation;
     private DailyOffer dailyOffer;
+    private String dailyOfferID;
+
     private Customer customer;
     private Restaurant restaurant;
+    private String restaurantID;
+    private ArrayList<Restaurant> restaurants;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +43,28 @@ public class ShowReservationDetails extends AppCompatActivity {
         String json = preferences.getString("reservation", null);
         if(json != null) {
             reservation = gson.fromJson(json, Reservation.class);
+
             dailyOffer = reservation.getDailyOffer();
             customer = reservation.getCustomer();
-            restaurant = dailyOffer.getRestaurant();
+            restaurantID = dailyOffer.getRestaurantID();
+            restaurants = DataGen.makeRestaurants();
+
+            for (Restaurant r : restaurants)
+            {
+                if (r.getID().contentEquals(restaurantID)) {
+                    restaurant = r;
+                }
+            }
+
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+            SharedPreferences.Editor editor = prefs.edit();
+            json = gson.toJson(restaurant);
+            editor.putString("restaurant", json);
+            editor.commit();
+
+            json = gson.toJson(dailyOffer);
+            editor.putString("offer", json);
+            editor.commit();
 
 
             ImageView imageView = (ImageView) findViewById(R.id.reservation_details_image);

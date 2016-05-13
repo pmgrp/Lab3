@@ -4,13 +4,11 @@ package com.sorbellini.s214631.lab3;
  * Created by eugeniosorbellini on 13/04/16.
  */
 public class DailyOffer {
-    private Restaurant restaurant;
     private String ID;
-    /*
     private String restaurantID;
     private String restaurantName;
     private double restaurantLatitude;
-    private double restaurantLongitude;*/
+    private double restaurantLongitude;
     private String name;
     private String description;
     private String photo;
@@ -20,13 +18,12 @@ public class DailyOffer {
 
     //default constructor
     public DailyOffer() {
-        this.restaurant = null;
         this.ID = null;
-        /*
+
         this.restaurantID = null;
         this.restaurantName = null;
         this.restaurantLatitude = 0;
-        this.restaurantLongitude = 0;*/
+        this.restaurantLongitude = 0;
         this.name = "";
         this.description = "";
         this.photo = "";
@@ -36,13 +33,11 @@ public class DailyOffer {
 
     //getter
 
-    public Restaurant getRestaurant() {return this.restaurant;}
-
 
     public String getID(){
         return this.ID;
     }
-    /*
+
     public String getRestaurantID(){
         return this.restaurantID;
     }
@@ -55,7 +50,7 @@ public class DailyOffer {
     public double getRestaurantLongitude(){
         return this.restaurantLongitude;
     }
-    */
+
 
     public String getName(){
         return this.name;
@@ -74,14 +69,10 @@ public class DailyOffer {
     }
 
     //setter
-    public void setRestaurant(Restaurant restaurant){
-        this.restaurant = restaurant;
-    }
-
 
     public void setID(String ID){this.ID = ID;}
 
-    /*
+
     public void setRestaurantID(String restaurantID){
         this.restaurantID = restaurantID;
     }
@@ -94,7 +85,7 @@ public class DailyOffer {
     }
     public void setRestaurantLongitude(double restaurantLongitude){
         this.restaurantLongitude = restaurantLongitude;
-    }*/
+    }
 
     public void setName(String name){
         this.name = name;
