@@ -112,8 +112,6 @@ public class ShowOfferDetails extends AppCompatActivity {
                     }
                 }
         );
-
-
     }
 
     private void createTimePicker() {
@@ -157,8 +155,6 @@ public class ShowOfferDetails extends AppCompatActivity {
         JsonArray jsonarray = element.getAsJsonArray();
         editor.putString("reservations", jsonarray.toString());
         editor.commit();
-
-
     }
 
     @Override

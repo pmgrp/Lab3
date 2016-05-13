@@ -53,6 +53,9 @@ public class ActivityRestaurantProfile extends AppCompatActivity {
 
             textView = (TextView) findViewById(R.id.restaurant_profile_restaurant_iva);
             textView.setText(restaurant.getRestaurantPiva());
+
+            textView = (TextView) findViewById(R.id.likeStatText);
+            textView.setText(Integer.toString(restaurant.getLikeCount()) + " people like this restaurant.");
         }
 
         final Button likeButton = (Button) findViewById(R.id.likeButton);
@@ -68,7 +71,7 @@ public class ActivityRestaurantProfile extends AppCompatActivity {
             public void onClick(View v) {
                 final int status = (Integer) v.getTag();
                 if (status == 1) {
-                    likeStatText.setText("You now like this restaurant");
+                    likeStatText.setText("You and " + Integer.toString(restaurant.getLikeCount()) + " people like this restaurant.");
                     likeButton.setText("Unlike this Restaurant");
                     v.setTag(0); //unlike
                 } else {

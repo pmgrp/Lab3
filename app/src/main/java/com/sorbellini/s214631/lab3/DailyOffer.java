@@ -28,6 +28,7 @@ public class DailyOffer {
         this.photo = "";
         this.price = -1;
         this.availability = -1;
+
     }
 
     //getter
