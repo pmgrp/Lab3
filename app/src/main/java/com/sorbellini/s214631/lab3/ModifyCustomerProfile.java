@@ -1,12 +1,16 @@
 package com.sorbellini.s214631.lab3;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,6 +19,8 @@ import com.google.gson.Gson;
 import java.util.Locale;
 
 public class ModifyCustomerProfile extends AppCompatActivity {
+
+    private Customer profile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +55,28 @@ public class ModifyCustomerProfile extends AppCompatActivity {
 
         }
         */
+    }
+
+
+    public void onClickPopupOffer() {
+        final CharSequence[] items = { "Cancel", "Save" };
+        AlertDialog.Builder builder = new AlertDialog.Builder(ModifyCustomerProfile.this);
+        builder.setTitle("Change of Password");
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int item) {
+                if (items[item].equals("Save")) {
+                    //save new password
+                    EditText editText = (EditText) findViewById(R.id.modify_customer_profile_password);
+                    String password = editText.getText().toString();
+
+                    dialog.dismiss();
+                } else if (items[item].equals("Cancel")) {
+                    dialog.dismiss();
+                }
+            }
+        });
+        builder.show();
     }
 
 

@@ -53,7 +53,7 @@
         </activity>
         <activity
             android:name=".CustomerProfile"
-            android:label="Your Profile"
+            android:label="Profile"
             android:parentActivityName=".ActivityMain"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Base">
@@ -69,7 +69,7 @@
             android:theme="@style/AppTheme.Base">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.sorbellini.s214631.lab3.CustomerProfile" />
+                android:value=".CustomerProfile" />
 
         </activity>
     </application>

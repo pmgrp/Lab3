@@ -66,10 +66,10 @@ public class ShowReservationDetails extends AppCompatActivity {
     }
 
 
-    /*
+
     public void goToRestaurantDescription(View view) {
 
     }
-    */
+
 
 }

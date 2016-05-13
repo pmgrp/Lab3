@@ -1,6 +1,7 @@
 package com.sorbellini.s214631.lab3;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.location.Location;
@@ -188,6 +189,12 @@ public class ActivityMain extends AppCompatActivity implements
             case 3:
                 spinner.setVisibility(View.GONE);
                 getSupportActionBar().setTitle("Reservations");
+                break;
+            //Profile fragment is the one in the view
+            case 4:
+                spinner.setVisibility(View.GONE);
+                getSupportActionBar().setTitle("Profile");
+                break;
         }
     }
 
@@ -240,7 +247,7 @@ public class ActivityMain extends AppCompatActivity implements
                 break;
             case 2:
                 spinner.setVisibility(View.GONE);
-                mDrawerList.setSelection(1);
+                mDrawerList.setSelection(2);
                 getSupportActionBar().setTitle("Reservations");
                 fragment = new FragmentShowReservations();
                 getSupportFragmentManager().beginTransaction()
@@ -248,7 +255,11 @@ public class ActivityMain extends AppCompatActivity implements
                 current_fragment = 3;
                 break;
             case 3:
-                // TODO
+                spinner.setVisibility(View.GONE);
+                mDrawerList.setSelection(3);
+                getSupportActionBar().setTitle("Profile");
+                startActivity(new Intent(ActivityMain.this, CustomerProfile.class));
+                current_fragment = 4;
                 break;
         }
     }
